@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Peer2Peer</string>
+
+    <string name="not_provided">Not Provided</string>
+
+    <string name="step1_title">Step 1: Personal Details</string>
+    <string name="profile_picture_preview">Profile picture preview</string>
+    <string name="select_profile_image_button">Select Profile Image</string>
+    <string name="first_name_label">First Name:</string>
+    <string name="surname_label">Surname:</string>
+    <string name="student_number_label">Student Number:</string>
+    <string name="email_label">Email:</string>
+    <string name="gender_label">Gender:</string>
+    <string name="race_label">Race:</string>
+
+    <string name="no_tutors_matching_criteria">No tutors found matching your current search and filter criteria.</string>
+    <string name="no_verified_tutors_available">No verified tutors are currently available. Check back later!</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+
+    <string name="step2_title">Step 2: Academic Background</string>
+    <string name="year_of_study_label">Year of Study:</string>
+    <string name="qualifications_hint">Qualifications (e.g., Degree, Diploma, relevant achievements)</string>
+    <string name="modules_hint">Module(s) to Tutor (e.g., MTHS101, CPLG201)</string>
+    <string name="modules_helper">Enter module code or name</string>
+
+    <string name="step3_title">Step 3: Tutoring Details</string>
+    <string name="languages_label">Preferred Tutoring Language(s):</string>
+    <string name="languages_select_prompt">Click to select languages</string>
+    <string name="bio_hint">Bio / Short Description (Max 500 chars)</string>
+    <string name="rate_hint">Hourly Rate (ZAR)</string>
+
+    <string name="dialog_title_languages">Select Tutoring Languages</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_clear_all">Clear All</string>
+
+    <string name="step5_title">Step 5: Review Your Profile</string>
+    <string name="step5_instructions">Please review all the information below before submitting for verification.</string>
+    <string name="review_section_personal">Personal Details</string>
+    <string name="review_label_name">Name:</string>
+    <string name="review_label_email">Email:</string>
+    <string name="review_label_student_id">Student ID:</string>
+    <string name="review_label_gender">Gender:</string>
+    <string name="review_label_race">Race:</string>
+    <string name="review_section_academic">Academic Background</string>
+    <string name="review_label_year">Year of Study:</string>
+    <string name="review_label_qualifications">Qualifications:</string>
+    <string name="review_label_modules">Modules to Tutor:</string>
+    <string name="review_section_tutoring">Tutoring Details</string>
+    <string name="review_label_languages">Tutoring Languages:</string>
+    <string name="review_label_bio">Bio:</string>
+    <string name="review_label_rate">Hourly Rate:</string>
+    <string name="review_section_documents">Verification Documents</string>
+    <string name="review_label_id_doc">ID Document:</string>
+    <string name="review_label_proof_doc">Proof of Reg.:</string>
+    <string name="review_label_record_doc">Academic Record:</string>
+    <string name="pending_title">Verification Pending</string>
+    <string name="pending_description">Your tutor profile has been submitted successfully. Please allow some time for our administrators to review your documents. You will be notified once your profile is approved.</string>
+    <string name="logout_button">Logout</string>
+    <string name="pending_icon_desc">Pending Icon</string>
+
+    <string name="progress_submitting">Submitting profile...</string>
+    <string name="error_not_logged_in">Error: User not logged in.</string>
+    <string name="error_missing_files">Please select all required documents and a profile picture before submitting.</string>
+    <string name="error_upload_url_mismatch">Error retrieving file URLs after upload.</string>
+    <string name="error_file_upload_failed">File upload failed. Please check your connection and try again.</string>
+    <string name="error_firestore_save_failed">Failed to save profile data. Please try again.</string>
+    <string name="error_submission_title">Submission Failed</string>
+    <string name="submit_success_message">Profile submitted successfully!</string>
+    <string name="submit_button">Submit</string>
+    <string name="next_button">Next</string>
+
+    <string-array name="gender_array">
+        <item>Select Gender...</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Non-binary</item>
+        <item>Prefer not to say</item>
+    </string-array>
+
+    <string-array name="race_array">
+        <item>Select Race...</item>
+        <item>African</item>
+        <item>Coloured</item>
+        <item>Indian</item>
+        <item>White</item>
+        <item>Asian</item>
+        <item>Other</item>
+        <item>Prefer not to say</item>
+    </string-array>
+
+    <string-array name="year_of_study_array">
+        <item>Select Year of Study...</item>
+        <item>Undergraduate - Year 1</item>
+        <item>Undergraduate - Year 2</item>
+        <item>Undergraduate - Year 3</item>
+        <item>Undergraduate - Year 4</item>
+        <item>Postgraduate - Honours</item>
+        <item>Postgraduate - Masters</item>
+        <item>Postgraduate - Doctorate</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="language_array">
+        <item>English</item>
+        <item>isiZulu</item>
+        <item>isiXhosa</item>
+        <item>Afrikaans</item>
+        <item>Sepedi</item>
+        <item>Setswana</item>
+        <item>Sesotho</item>
+        <item>Xitsonga</item>
+        <item>siSwati</item>
+        <item>Tshivenda</item>
+        <item>isiNdebele</item>
+        <item>Sign Language</item>
+        <item>Other</item>
+    </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="label_modules">Modules: </string>
+    <string name="cd_tutor_list">List of available tutors</string>
+    <string name="rate_format">R %.2f /h</string>
+    <string name="rate_not_available">Rate N/A</string>
+
+    <string name="no_ratings_yet">No ratings yet</string>
+
+    <plurals name="review_count_format">
+        <item quantity="one">%1$s (%d review)</item>
+        <item quantity="other">%1$s (%d reviews)</item>
+    </plurals>
+
+    <string name="tutor_schedule_no_schedule_message">No schedule found.</string>
+
+    <string name="tutor_dashboard_title">Tutor Dashboard</string>
+    <string name="tutor_dashboard_welcome">Welcome, Tutor! Manage your schedule and upcoming sessions here.</string>
+    <string name="tutor_dashboard_manage_availability">Manage Availability</string>
+    <string name="tutor_dashboard_my_schedule">My Schedule</string>
+    <string name="tutor_dashboard_logout">Logout</string>
+
+        <string name="content_desc_review_list">List of tutor reviews</string>
+        <string name="no_reviews_yet">No reviews yet.</string>
+
+        <string name="no_resources_shared_by_tutor">No resources have been shared by this tutor yet.</string>
+        <string name="failed_to_load_resources">Failed to load resources. Please try again.</string>
+
+
+
+</resources>

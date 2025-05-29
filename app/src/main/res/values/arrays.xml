@@ -1,0 +1,10 @@
+<resources>
+    <string-array name="report_reasons_array">
+        <item>Select a reason...</item> <item>Unprofessional Conduct</item>
+        <item>Misleading Profile Information</item>
+        <item>No Show for Session</item>
+        <item>Safety Concern</item>
+        <item>Poor Tutoring Quality</item>
+        <item>Other (Specify in details)</item>
+    </string-array>
+</resources>

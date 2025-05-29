@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/image_view_tutor_profile"
+            android:layout_width="60dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/profile_picture_preview"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_tutor_rate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/text_view_tutor_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_view_tutor_profile"
+            app:layout_constraintTop_toTopOf="@id/image_view_tutor_profile"
+            tools:text="Johnathan P. Doe" />
+
+        <TextView
+            android:id="@+id/text_view_tutor_modules"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/image_view_tutor_profile"
+            app:layout_constraintTop_toBottomOf="@id/text_view_tutor_name"
+            tools:text="Modules: MATH101, PHYS102, COMP101, HIST200, ENGL101" />
+
+        <TextView
+            android:id="@+id/text_view_tutor_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textStyle="bold"
+            android:textColor="?colorPrimary"
+            app:layout_constraintStart_toEndOf="@id/image_view_tutor_profile"
+            app:layout_constraintTop_toBottomOf="@id/text_view_tutor_modules"
+            tools:text="R 100.00 /h" />
+
+        <RatingBar
+            android:id="@+id/rating_bar_tutor"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp" android:layout_marginTop="8dp" android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="0.1"
+            app:layout_constraintStart_toEndOf="@id/image_view_tutor_profile"
+            app:layout_constraintTop_toBottomOf="@id/text_view_tutor_rate" tools:rating="4.5" />
+
+        <TextView
+            android:id="@+id/text_view_tutor_rating_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintBottom_toBottomOf="@id/rating_bar_tutor"
+            app:layout_constraintStart_toEndOf="@id/rating_bar_tutor"
+            app:layout_constraintTop_toTopOf="@id/rating_bar_tutor"
+            tools:text="4.5 (12)" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "463506502386",
+    "project_id": "peer2peer-4cef3",
+    "storage_bucket": "peer2peer-4cef3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463506502386:android:9c55b57a1fdd32e4e1d66b",
+        "android_client_info": {
+          "package_name": "com.example.peer2peer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYY94d9WAndpWzRN06e8Yl6OZJFg2ZK14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

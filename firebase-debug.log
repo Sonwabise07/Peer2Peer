@@ -1,0 +1,143 @@
+[debug] [2025-05-20T00:24:28.717Z] ----------------------------------------------------------------------
+[debug] [2025-05-20T00:24:28.750Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\CC\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions --debug
+[debug] [2025-05-20T00:24:28.751Z] CLI Version:   14.4.0
+[debug] [2025-05-20T00:24:28.752Z] Platform:      win32
+[debug] [2025-05-20T00:24:28.753Z] Node Version:  v20.19.1
+[debug] [2025-05-20T00:24:28.758Z] Time:          Tue May 20 2025 02:24:28 GMT+0200 (South Africa Standard Time)
+[debug] [2025-05-20T00:24:28.759Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-05-20T00:24:29.307Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-05-20T00:24:29.321Z] > authorizing via signed-in user (mtirarasonwabise1@gmail.com)
+[debug] [2025-05-20T00:24:29.322Z] [iam] checking project peer2peer-4cef3 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2025-05-20T00:24:29.325Z] Checked if tokens are valid: false, expires at: 1747700247344
+[debug] [2025-05-20T00:24:29.325Z] Checked if tokens are valid: false, expires at: 1747700247344
+[debug] [2025-05-20T00:24:29.327Z] > refreshing access token with scopes: []
+[debug] [2025-05-20T00:24:29.330Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-05-20T00:24:29.331Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-05-20T00:24:31.140Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-05-20T00:24:31.141Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-05-20T00:24:31.264Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/peer2peer-4cef3:testIamPermissions [none]
+[debug] [2025-05-20T00:24:31.266Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/peer2peer-4cef3:testIamPermissions x-goog-quota-user=projects/peer2peer-4cef3
+[debug] [2025-05-20T00:24:31.268Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/peer2peer-4cef3:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-05-20T00:24:32.909Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/peer2peer-4cef3:testIamPermissions 200
+[debug] [2025-05-20T00:24:32.923Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/peer2peer-4cef3:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2025-05-20T00:24:32.924Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:32.925Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:32.926Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/peer2peer-4cef3/serviceAccounts/peer2peer-4cef3@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2025-05-20T00:24:32.927Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/peer2peer-4cef3/serviceAccounts/peer2peer-4cef3@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2025-05-20T00:24:34.773Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/peer2peer-4cef3/serviceAccounts/peer2peer-4cef3@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2025-05-20T00:24:34.774Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/peer2peer-4cef3/serviceAccounts/peer2peer-4cef3@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'peer2peer-4cef3'...
+[info] 
+[info] i  deploying functions 
+[info] +  functions: Finished running predeploy script. 
+[debug] [2025-05-20T00:24:34.790Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:34.791Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:34.792Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/cloudresourcemanager.googleapis.com [none]
+[debug] [2025-05-20T00:24:34.793Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/cloudresourcemanager.googleapis.com x-goog-quota-user=projects/peer2peer-4cef3
+[debug] [2025-05-20T00:24:36.874Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/cloudresourcemanager.googleapis.com 200
+[debug] [2025-05-20T00:24:36.876Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/cloudresourcemanager.googleapis.com [omitted]
+[debug] [2025-05-20T00:24:36.877Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:36.877Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:36.878Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/peer2peer-4cef3 [none]
+[debug] [2025-05-20T00:24:37.246Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/peer2peer-4cef3 200
+[debug] [2025-05-20T00:24:37.303Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/peer2peer-4cef3 {"projectNumber":"463506502386","projectId":"peer2peer-4cef3","lifecycleState":"ACTIVE","name":"Peer2Peer","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2025-04-13T19:45:19.750222Z"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[debug] [2025-05-20T00:24:37.306Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:37.309Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:37.310Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:37.310Z] Checked if tokens are valid: true, expires at: 1747704270143
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[debug] [2025-05-20T00:24:37.312Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:37.312Z] Checked if tokens are valid: true, expires at: 1747704270143
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2025-05-20T00:24:37.313Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:37.314Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:37.315Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/cloudfunctions.googleapis.com [none]
+[debug] [2025-05-20T00:24:37.316Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/peer2peer-4cef3
+[debug] [2025-05-20T00:24:37.317Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/runtimeconfig.googleapis.com [none]
+[debug] [2025-05-20T00:24:37.318Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/peer2peer-4cef3
+[debug] [2025-05-20T00:24:37.323Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/cloudbuild.googleapis.com [none]
+[debug] [2025-05-20T00:24:37.323Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/cloudbuild.googleapis.com x-goog-quota-user=projects/peer2peer-4cef3
+[debug] [2025-05-20T00:24:37.328Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/artifactregistry.googleapis.com [none]
+[debug] [2025-05-20T00:24:37.328Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/artifactregistry.googleapis.com x-goog-quota-user=projects/peer2peer-4cef3
+[debug] [2025-05-20T00:24:38.957Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/cloudfunctions.googleapis.com 200
+[debug] [2025-05-20T00:24:38.983Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/cloudfunctions.googleapis.com [omitted]
+[info] +  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2025-05-20T00:24:39.131Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/artifactregistry.googleapis.com 200
+[debug] [2025-05-20T00:24:39.131Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/artifactregistry.googleapis.com [omitted]
+[info] +  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2025-05-20T00:24:39.135Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/runtimeconfig.googleapis.com 200
+[debug] [2025-05-20T00:24:39.136Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2025-05-20T00:24:39.138Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/cloudbuild.googleapis.com 200
+[debug] [2025-05-20T00:24:39.139Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/peer2peer-4cef3/services/cloudbuild.googleapis.com [omitted]
+[info] +  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2025-05-20T00:24:39.142Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:39.142Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:39.143Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/peer2peer-4cef3/adminSdkConfig [none]
+[debug] [2025-05-20T00:24:40.271Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/peer2peer-4cef3/adminSdkConfig 200
+[debug] [2025-05-20T00:24:40.273Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/peer2peer-4cef3/adminSdkConfig {"projectId":"peer2peer-4cef3","storageBucket":"peer2peer-4cef3.firebasestorage.app"}
+[debug] [2025-05-20T00:24:40.275Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:40.276Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:40.277Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/peer2peer-4cef3/configs [none]
+[debug] [2025-05-20T00:24:41.823Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/peer2peer-4cef3/configs 200
+[debug] [2025-05-20T00:24:41.824Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/peer2peer-4cef3/configs {"configs":[{"name":"projects/peer2peer-4cef3/configs/stripe"}]}
+[debug] [2025-05-20T00:24:41.826Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:41.827Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:41.828Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/peer2peer-4cef3/configs/stripe/variables [none]
+[debug] [2025-05-20T00:24:42.941Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/peer2peer-4cef3/configs/stripe/variables 200
+[debug] [2025-05-20T00:24:42.942Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/peer2peer-4cef3/configs/stripe/variables {"variables":[{"name":"projects/peer2peer-4cef3/configs/stripe/variables/secret","updateTime":"2025-04-27T05:59:15.827819851Z"}]}
+[debug] [2025-05-20T00:24:42.945Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:42.946Z] Checked if tokens are valid: true, expires at: 1747704270143
+[debug] [2025-05-20T00:24:42.947Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/peer2peer-4cef3/configs/stripe/variables/secret [none]
+[debug] [2025-05-20T00:24:44.081Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/peer2peer-4cef3/configs/stripe/variables/secret 200
+[debug] [2025-05-20T00:24:44.082Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/peer2peer-4cef3/configs/stripe/variables/secret {"name":"projects/peer2peer-4cef3/configs/stripe/variables/secret","updateTime":"2025-04-27T05:59:15.827819851Z","text":"sk_test_51RILwoQRVQzfRsyKNVoRiK6gpZTHwCiK3axmBAr3W8JTsYlqZL0wVG55k4ZyEVkLmA5DdwcQGp1SXUNjL8gCg3pK00KLufpsfG"}
+[debug] [2025-05-20T00:24:44.090Z] Validating nodejs source
+[debug] [2025-05-20T00:24:54.222Z] checkFunctionsSDKVersion was unable to fetch information from NPM Error: spawnSync C:\WINDOWS\system32\cmd.exe ETIMEDOUT
+    at Object.spawnSync (node:internal/child_process:1123:20)
+    at Object.spawnSync (node:child_process:877:24)
+    at Function.spawnSync [as sync] (C:\Users\CC\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\cross-spawn\index.js:26:23)
+    at Object.getLatestSDKVersion (C:\Users\CC\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\versioning.js:54:25)
+    at Object.checkFunctionsSDKVersion (C:\Users\CC\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\versioning.js:74:32)
+    at Delegate.validate (C:\Users\CC\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\runtimes\node\index.js:86:20)
+    at loadCodebases (C:\Users\CC\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\prepare.js:304:31)
+    at async prepare (C:\Users\CC\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\prepare.js:59:24)
+    at async chain (C:\Users\CC\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\index.js:42:9)
+    at async deploy (C:\Users\CC\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\index.js:119:5)
+[debug] [2025-05-20T00:24:54.253Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Firebase Functions backend for Peer2Peer",
+  "scripts": {
+    "build": "tsc",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "20"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^13.3.0",
+    "firebase-functions": "^6.3.2",
+    "stripe": "^18.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.0.0"
+  },
+  "private": true
+}
+[debug] [2025-05-20T00:24:54.285Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2025-05-20T00:24:54.375Z] Could not find functions.yaml. Must use http discovery
+[debug] [2025-05-20T00:24:54.604Z] Found firebase-functions binary at 'C:\Users\CC\AndroidStudioProjects\Peer2Peer\functions\node_modules\.bin\firebase-functions'
+[debug] [2025-05-20T00:25:04.637Z] Failed to call quitquitquit. This often means the server failed to start request to http://localhost:8307/__/quitquitquit failed, reason:  {"message":"request to http://localhost:8307/__/quitquitquit failed, reason: ","type":"system","errno":"ECONNREFUSED","code":"ECONNREFUSED"}
+[error] 
+[error] Error: User code failed to load. Cannot determine backend specification. Timeout after 10000. See https://firebase.google.com/docs/functions/tips#avoid_deployment_timeouts_during_initialization'

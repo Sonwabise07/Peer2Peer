@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TuteeDashboardActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_tutee_dashboard"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Find a Tutor" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_view_tutors"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:iconifiedByDefault="false"
+        app:layout_constraintEnd_toStartOf="@+id/chip_filter_tutors"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_tutee_dashboard"
+        app:queryHint="Search tutor name..." />
+
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chip_filter_tutors"
+        style="@style/Widget.MaterialComponents.Chip.Action"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:text="Filter"
+        app:chipIcon="@drawable/ic_filter_list"
+        app:layout_constraintBottom_toBottomOf="@+id/search_view_tutors"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/search_view_tutors"
+        app:layout_constraintTop_toTopOf="@+id/search_view_tutors" />
+
+    <TextView
+        android:id="@+id/text_available_tutors_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:labelFor="@id/recycler_view_tutors"
+        android:text="Available Tutors"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_view_tutors" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_tutors"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="List of available tutors"
+        app:layout_constraintBottom_toTopOf="@+id/button_my_chats" app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_available_tutors_label"
+        tools:listitem="@layout/list_item_tutor" />
+
+    <TextView
+        android:id="@+id/text_no_tutors_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No tutors found matching criteria."
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/recycler_view_tutors"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_view_tutors"
+        app:layout_constraintStart_toStartOf="@+id/recycler_view_tutors"
+        app:layout_constraintTop_toTopOf="@+id/recycler_view_tutors"
+        tools:visibility="visible"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar_loading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/recycler_view_tutors"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_view_tutors"
+        app:layout_constraintStart_toStartOf="@+id/recycler_view_tutors"
+        app:layout_constraintTop_toTopOf="@+id/recycler_view_tutors"
+        tools:visibility="visible"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_my_chats"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="My Chats"
+        app:icon="@drawable/ic_chat_bubble_outline" app:layout_constraintBottom_toTopOf="@+id/button_view_shared_resources"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_view_shared_resources"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="View Shared Resources"
+        app:icon="@drawable/ic_folder_shared"
+        app:layout_constraintBottom_toTopOf="@+id/button_my_bookings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_my_bookings"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="View your scheduled bookings"
+        android:text="My Bookings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_dashboard_logout"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_dashboard_logout"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="Log out of the application"
+        android:text="Logout"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button_my_bookings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_my_bookings" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

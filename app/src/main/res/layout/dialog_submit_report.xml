@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reason for Reporting:"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_marginBottom="4dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerReportReason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        style="@style/Widget.AppCompat.Spinner.Underlined"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Provide Details:"
+        style="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:layout_marginBottom="4dp"/>
+
+    <EditText
+        android:id="@+id/editTextReportDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minLines="4"
+        android:gravity="top|start"
+        android:inputType="textMultiLine|textCapSentences"
+        android:hint="Please be as specific as possible..."
+        android:background="@drawable/edittext_border_background" /> </LinearLayout>

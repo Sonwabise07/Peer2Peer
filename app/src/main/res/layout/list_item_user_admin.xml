@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="?android:attr/selectableItemBackground"> <TextView
+    android:id="@+id/text_user_item_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="User Full Name"
+    android:textAppearance="?attr/textAppearanceListItem"
+    android:textSize="16sp"
+    android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_user_item_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="user.email@example.com"
+        android:textAppearance="?attr/textAppearanceListItemSecondary"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp">
+
+        <TextView
+            android:id="@+id/text_user_item_role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Role: Tutor"
+            android:textSize="12sp"
+            android:background="@drawable/chip_background"  /> <TextView
+        android:id="@+id/text_user_item_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status: Verified"
+        android:textSize="12sp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/chip_background" /> </LinearLayout>
+
+</LinearLayout>

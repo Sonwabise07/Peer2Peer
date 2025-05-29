@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        tools:context=".fragments.TutorProfileStep5Fragment">
+
+        <TextView
+            android:id="@+id/text_step5_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/step5_title"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_step5_instructions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/step5_instructions"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_step5_title" />
+
+        <TextView
+            android:id="@+id/label_section_personal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/review_section_personal"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_step5_instructions" />
+
+        <TextView
+            android:id="@+id/label_review_name"
+            style="@style/ReviewLabelStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp"
+            android:text="@string/review_label_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_section_personal" />
+        <TextView
+            android:id="@+id/text_review_name"
+            style="@style/ReviewValueStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_review_name"
+            tools:text="John Doe"/>
+
+        <TextView
+            android:id="@+id/label_review_email"
+            style="@style/ReviewLabelStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/review_label_email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_review_name" />
+        <TextView
+            android:id="@+id/text_review_email"
+            style="@style/ReviewValueStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_review_email"
+            tools:text="user@example.com"/>
+
+        <TextView
+            android:id="@+id/label_review_student_id"
+            style="@style/ReviewLabelStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/review_label_student_id"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_review_email" />
+        <TextView
+            android:id="@+id/text_review_student_id"
+            style="@style/ReviewValueStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_review_student_id"
+            tools:text="12345678"/>
+
+        <TextView
+            android:id="@+id/label_review_gender"
+            style="@style/ReviewLabelStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/review_label_gender"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_review_student_id" />
+        <TextView
+            android:id="@+id/text_review_gender"
+            style="@style/ReviewValueStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_review_gender"
+            tools:text="Male"/>
+
+        <TextView
+            android:id="@+id/label_review_race"
+            style="@style/ReviewLabelStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/review_label_race"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_review_gender" />
+        <TextView
+            android:id="@+id/text_review_race"
+            style="@style/ReviewValueStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_review_race"
+            tools:text="African"/>
+
+        <TextView
+            android:id="@+id/label_section_academic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/review_section_academic"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_review_race" />
+
+        <TextView
+            android:id="@+id/label_review_year"
+            style="@style/ReviewLabelStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp"
+            android:text="@string/review_label_year"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_section_academic" />
+        <TextView
+            android:id="@+id/text_review_year"
+            style="@style/ReviewValueStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_review_year"
+            tools:text="Undergraduate - Year 3"/>
+
+        <TextView
+            android:id="@+id/label_review_qualifications"
+            style="@style/ReviewLabelStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/review_label_qualifications"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_review_year" />
+        <TextView
+            android:id="@+id/text_review_qualifications"
+            style="@style/ReviewValueStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_review_qualifications"
+            tools:text="BSc Computer Science, Various Awards and things that might wrap to multiple lines."/>
+
+        <TextView
+            android:id="@+id/label_review_modules"
+            style="@style/ReviewLabelStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/review_label_modules"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_review_qualifications" />
+        <TextView
+            android:id="@+id/text_review_modules"
+            style="@style/ReviewValueStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_review_modules"
+            tools:text="MTHS101, CPLG201"/>
+
+        <TextView
+            android:id="@+id/label_section_tutoring"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/review_section_tutoring"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_review_modules" />
+
+        <TextView
+            android:id="@+id/label_review_languages"
+            style="@style/ReviewLabelStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp"
+            android:text="@string/review_label_languages"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_section_tutoring" />
+        <TextView
+            android:id="@+id/text_review_languages"
+            style="@style/ReviewValueStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_review_languages"
+            tools:text="English, isiZulu"/>
+
+        <TextView
+            android:id="@+id/label_review_bio"
+            style="@style/ReviewLabelStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/review_label_bio"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_review_languages" />
+        <TextView
+            android:id="@+id/text_review_bio"
+            style="@style/ReviewValueStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_review_bio"
+            tools:text="Experienced tutor specializing in introductory programming concepts. Also skilled in advanced topics and project assistance."/>
+
+        <TextView
+            android:id="@+id/label_review_rate"
+            style="@style/ReviewLabelStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/review_label_rate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_review_bio" />
+        <TextView
+            android:id="@+id/text_review_rate"
+            style="@style/ReviewValueStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_review_rate"
+            tools:text="R 150"/>
+
+
+        <TextView
+            android:id="@+id/label_section_documents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/review_section_documents"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_review_rate" />
+
+        <TextView
+            android:id="@+id/label_review_id_doc"
+            style="@style/ReviewLabelStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp"
+            android:text="@string/review_label_id_doc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_section_documents" />
+        <TextView
+            android:id="@+id/text_review_id_doc_filename"
+            style="@style/ReviewValueStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_review_id_doc"
+            tools:text="id_document.pdf"/>
+
+        <TextView
+            android:id="@+id/label_review_proof_doc"
+            style="@style/ReviewLabelStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/review_label_proof_doc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_review_id_doc_filename" />
+        <TextView
+            android:id="@+id/text_review_proof_doc_filename"
+            style="@style/ReviewValueStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_review_proof_doc"
+            tools:text="proof.png"/>
+
+        <TextView
+            android:id="@+id/label_review_record_doc"
+            style="@style/ReviewLabelStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/review_label_record_doc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_review_proof_doc_filename" />
+        <TextView
+            android:id="@+id/text_review_record_doc_filename"
+            style="@style/ReviewValueStyle"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_review_record_doc"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="transcript.jpg"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Meeting Link"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/editText_meeting_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Paste MS Teams link here"
+        android:inputType="textUri"
+        android:minHeight="48dp"
+        android:autofillHints="url" />
+
+</LinearLayout>

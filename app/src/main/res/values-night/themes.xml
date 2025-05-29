@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.Peer2Peer" parent="Theme.Material3.DayNight.NoActionBar">
+    </style>
+
+    <style name="ReviewLabelStyle">...</style>
+    <style name="ReviewValueStyle">...</style>
+    <style name="RatingBar" parent="Widget.AppCompat.RatingBar.Small">...</style>
+
+    <style name="CustomCalendarStyle" parent="ThemeOverlay.Material3.Dark"> <item name="colorPrimary">?attr/colorPrimary</item>
+        <item name="colorOnPrimary">?attr/colorOnPrimary</item>
+        <item name="colorOnSurface">?attr/colorOnSurface</item>
+
+    </style>
+    <style name="CustomCalendarWeekText" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CustomCalendarDateTextNight" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">#FFFFFFFF</item> </style>
+</resources>
