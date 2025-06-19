@@ -1,5 +1,4 @@
-package com.example.peer2peer; // Adjusted package to match your structure
-
+package com.example.peer2peer; 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -8,15 +7,14 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
-// Import Booking from your main package
+
 import com.example.peer2peer.Booking;
-// Import SessionAlarmReceiver from your main package
+
 import com.example.peer2peer.SessionAlarmReceiver;
 
 import com.google.firebase.Timestamp;
 
-// Removed unused import java.util.Calendar;
-// Removed unused import java.util.Random; // Random is not used here anymore
+
 import java.util.concurrent.TimeUnit;
 
 public class AlarmScheduler {
@@ -25,7 +23,7 @@ public class AlarmScheduler {
     private static final long REMINDER_OFFSET_MINUTES = 10; // 10 minutes before
 
     public static void scheduleSessionReminder(Context context, Booking booking) {
-        // Use getDocumentId() as the unique booking identifier
+        
         if (booking == null || booking.getStartTime() == null || booking.getDocumentId() == null) {
             Log.e(TAG, "Cannot schedule reminder, booking data is invalid (missing start time or documentId).");
             return;
@@ -35,7 +33,7 @@ public class AlarmScheduler {
         long sessionStartTimeMillis = sessionStartTime.toDate().getTime();
         long reminderTimeMillis = sessionStartTimeMillis - TimeUnit.MINUTES.toMillis(REMINDER_OFFSET_MINUTES);
 
-        // Ensure reminder time is in the future
+        
         if (reminderTimeMillis <= System.currentTimeMillis()) {
             Log.d(TAG, "Session reminder time for booking " + booking.getDocumentId() + " is in the past. Not scheduling.");
             return;
@@ -47,26 +45,25 @@ public class AlarmScheduler {
             return;
         }
 
-        // Prepare intent for the SessionAlarmReceiver
+       
         Intent intent = new Intent(context, SessionAlarmReceiver.class);
-        String sessionTitle = "Session Reminder"; // Generic title
+        String sessionTitle = "Session Reminder";
         String sessionDescription = "Your session for " + (booking.getModuleCode() != null ? booking.getModuleCode() : "your lesson");
 
         sessionDescription += " with " + (booking.getTutorName() != null ? booking.getTutorName() : "your tutor/tutee");
         sessionDescription += " is starting in " + REMINDER_OFFSET_MINUTES + " minutes.";
 
-        intent.putExtra(SessionAlarmReceiver.EXTRA_BOOKING_ID, booking.getDocumentId()); // Use getDocumentId()
+        intent.putExtra(SessionAlarmReceiver.EXTRA_BOOKING_ID, booking.getDocumentId()); 
         intent.putExtra(SessionAlarmReceiver.EXTRA_SESSION_TITLE, sessionTitle);
         intent.putExtra(SessionAlarmReceiver.EXTRA_SESSION_DESCRIPTION, sessionDescription);
 
-        // Create a unique notification ID for this specific alarm trigger using documentId's hash code
+        
         int notificationId = booking.getDocumentId().hashCode();
         intent.putExtra(SessionAlarmReceiver.EXTRA_NOTIFICATION_ID, notificationId);
 
 
-        // Use documentId to create a unique request code for the PendingIntent
-        // This allows cancelling this specific alarm later.
-        int requestCode = ("reminder_" + booking.getDocumentId()).hashCode(); // Use getDocumentId()
+        
+        int requestCode = ("reminder_" + booking.getDocumentId()).hashCode(); 
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                 requestCode,
@@ -81,7 +78,7 @@ public class AlarmScheduler {
                 } else {
                     Log.w(TAG, "Cannot schedule exact alarms. App needs SCHEDULE_EXACT_ALARM permission or user hasn't granted it for booking: " + booking.getDocumentId());
                     Toast.makeText(context, "Please grant permission to schedule exact alarms for session reminders.", Toast.LENGTH_LONG).show();
-                    // Consider redirecting to app settings for the permission or using an inexact alarm as fallback.
+                    
                 }
             } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, reminderTimeMillis, pendingIntent);
@@ -96,7 +93,7 @@ public class AlarmScheduler {
         }
     }
 
-    public static void cancelSessionReminder(Context context, String documentId) { // Parameter renamed to documentId for clarity
+    public static void cancelSessionReminder(Context context, String documentId) { 
         if (documentId == null) {
             Log.e(TAG, "Cannot cancel reminder, documentId is null.");
             return;
@@ -108,8 +105,8 @@ public class AlarmScheduler {
             return;
         }
 
-        Intent intent = new Intent(context, SessionAlarmReceiver.class); // Intent must match
-        int requestCode = ("reminder_" + documentId).hashCode();          // Request code must match using the documentId
+        Intent intent = new Intent(context, SessionAlarmReceiver.class);
+        int requestCode = ("reminder_" + documentId).hashCode();         
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                 requestCode,

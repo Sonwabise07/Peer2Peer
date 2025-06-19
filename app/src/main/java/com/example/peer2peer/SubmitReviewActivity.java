@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.app.Activity; // Import Activity for RESULT_OK
+import android.app.Activity; 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -37,7 +37,7 @@ public class SubmitReviewActivity extends AppCompatActivity {
 
     private static final String TAG = "SubmitReviewActivity";
 
-    // Intent Extras Keys
+    
     public static final String EXTRA_BOOKING_ID = "EXTRA_BOOKING_ID";
     public static final String EXTRA_TUTOR_UID = "EXTRA_TUTOR_UID";
     public static final String EXTRA_TUTOR_NAME = "EXTRA_TUTOR_NAME";
@@ -165,10 +165,7 @@ public class SubmitReviewActivity extends AppCompatActivity {
                 bookingId,
                 tutorUid
         );
-        // Assuming your Review model's constructor handles Timestamp or you set it via a setter
-        // If your Review model expects Timestamp in constructor, adjust accordingly.
-        // For now, assuming a setter or that it handles it internally like @ServerTimestamp
-        // review.setTimestamp(Timestamp.now()); // If you have this setter and need to set client-side time
+        
 
         submitReviewBatch(review);
     }
@@ -212,9 +209,9 @@ public class SubmitReviewActivity extends AppCompatActivity {
                     Log.e(TAG, "Error submitting initial review batch", e);
                     Toast.makeText(SubmitReviewActivity.this, "Failed to submit review: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     showLoading(false);
-                    // Set a different result if the operation failed to inform the calling activity
+                   
                     setResult(Activity.RESULT_CANCELED);
-                    // finish(); // Optionally, you might not want to finish if it fails, to allow retry
+                    
                 });
     }
 
@@ -262,8 +259,7 @@ public class SubmitReviewActivity extends AppCompatActivity {
             Log.d(TAG, "Client-side aggregation transaction success for tutor: " + tutorId);
         }).addOnFailureListener(e -> {
             Log.e(TAG, "Client-side aggregation transaction failure for tutor: " + tutorId, e);
-            // Optionally, inform the user or try a fallback if this critical update fails.
-            // For now, just logging.
+            
         });
     }
 

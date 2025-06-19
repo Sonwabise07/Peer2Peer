@@ -1,6 +1,6 @@
-package com.example.peer2peer; // Ensure this package declaration is correct
+package com.example.peer2peer; 
 
-// --- Android/Java Imports ---
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,27 +9,26 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-// Import MaterialButton
+
 import com.google.android.material.button.MaterialButton;
-import android.widget.Button; // Keep for logout button if it's a standard Button
+import android.widget.Button; 
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-// Removed: androidx.appcompat.app.ActionBarDrawerToggle; (Not used in provided code)
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-// Removed: androidx.drawerlayout.widget.DrawerLayout; (Not used in provided code)
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-// --- Custom Class Imports ---
+
 import com.example.peer2peer.fragments.FilterTutorsBottomSheetDialogFragment;
 import com.example.peer2peer.adapters.TutorListAdapter;
-import com.example.peer2peer.ChatListActivity; // For the "My Chats" button
-import com.example.peer2peer.ChatbotActivity; // <-- IMPORT FOR CHATBOT
+import com.example.peer2peer.ChatListActivity; 
+import com.example.peer2peer.ChatbotActivity; 
 import com.google.android.material.chip.Chip;
 
 // --- Firebase/Task Imports ---
@@ -157,25 +156,21 @@ public class TuteeDashboardActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.dashboard_toolbar_menu, menu); // Assuming this menu exists
+        inflater.inflate(R.menu.dashboard_toolbar_menu, menu)
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
-        if (itemId == R.id.action_open_chatbot) { // Ensure this ID matches your menu XML
+        if (itemId == R.id.action_open_chatbot) {
             Log.d(TAG, "Chatbot menu item selected. Launching ChatbotActivity.");
-            // --- CORRECTED INTENT TO LAUNCH CHATBOTACTIVITY ---
+           
             Intent intent = new Intent(TuteeDashboardActivity.this, ChatbotActivity.class);
             startActivity(intent);
             return true;
         }
-        // Example for another item, if you had one for "Profile"
-        // else if (itemId == R.id.action_view_profile) {
-        //     startActivity(new Intent(TuteeDashboardActivity.this, TuteeProfileActivity.class));
-        //     return true;
-        // }
+        
         return super.onOptionsItemSelected(item);
     }
 
@@ -213,19 +208,14 @@ public class TuteeDashboardActivity extends AppCompatActivity
 
     private void performLogout() {
         FirebaseUser user = mAuth.getCurrentUser();
-        String userRoleForIntent = MainActivity.ROLE_TUTEE; // Default or determine actual role if needed for LoginActivity differentiation
+        String userRoleForIntent = MainActivity.ROLE_TUTEE;
 
-        // If you store the role locally (e.g., in SharedPreferences) upon login, you could fetch it here.
-        // For now, assuming TuteeDashboard always logs out a "Tutee" for the LoginActivity's title context.
-        // Or, more robustly, don't pass a role to LoginActivity on logout, and let LoginActivity handle it.
-        // We already updated LoginActivity to handle a null preSelectedUserRole.
+       
 
         mAuth.signOut();
         Toast.makeText(TuteeDashboardActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(TuteeDashboardActivity.this, LoginActivity.class);
-        // No need to pass EXTRA_USER_ROLE from here if LoginActivity handles null preSelectedRole correctly
-        // intent.putExtra(MainActivity.EXTRA_USER_ROLE, userRoleForIntent);
-        // Log.d(TAG, "Logging out. LoginActivity will determine role flow.");
+        
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
@@ -283,15 +273,13 @@ public class TuteeDashboardActivity extends AppCompatActivity
                 .whereEqualTo("role", "Tutor")
                 .whereEqualTo("profileStatus", "verified");
 
-        // Conditional ordering for hourlyRate. Order by documentId as a secondary sort for stable pagination if ever implemented.
+       
         if (currentMaxRateFilter != null && currentMaxRateFilter < DEFAULT_MAX_RATE) {
             query = query.whereLessThanOrEqualTo("hourlyRate", currentMaxRateFilter)
                     .orderBy("hourlyRate", Query.Direction.ASCENDING)
                     .orderBy(FieldPath.documentId(), Query.Direction.ASCENDING); // Add secondary sort
         } else {
-            // Default sort if no rate filter is applied or if it's the default max.
-            // Consider a more meaningful default sort, e.g., averageRating or name.
-            // For now, just documentId to ensure some order.
+            
             query = query.orderBy(FieldPath.documentId(), Query.Direction.ASCENDING);
         }
 
@@ -309,7 +297,7 @@ public class TuteeDashboardActivity extends AppCompatActivity
                                     Tutor tutor = document.toObject(Tutor.class);
                                     tutor.setUid(document.getId()); // Manually set UID from document ID
 
-                                    // Ensure fullName is populated if not directly in Firestore object
+                                    
                                     if (TextUtils.isEmpty(tutor.getFullName())) {
                                         String first = tutor.getFirstName() != null ? tutor.getFirstName() : "";
                                         String last = tutor.getSurname() != null ? tutor.getSurname() : "";
@@ -487,19 +475,13 @@ public class TuteeDashboardActivity extends AppCompatActivity
             if (recyclerViewTutors != null) recyclerViewTutors.setVisibility(View.GONE);
             if (textViewNoTutorsFound != null) textViewNoTutorsFound.setVisibility(View.GONE);
         }
-        // When not loading, updateEmptyState() will handle visibility of RV and no_bookings text.
-        // This needs to be called AFTER data is processed. It is called in loadBaseTutorData's onComplete
-        // and applyAllClientFilters.
+       
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        // Consider if reloading all tutors on every resume is necessary or too data-intensive.
-        // It ensures freshness but might be slow.
-        // If you want to refresh only if certain conditions change, add logic here.
-        // For now, let's keep it or comment it out if it causes too many reads.
-        // loadBaseTutorData();
+        
         Log.d(TAG, "onResume called. Data will be as is unless explicitly refreshed by user action or specific logic.");
     }
 }

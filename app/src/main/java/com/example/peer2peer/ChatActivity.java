@@ -31,7 +31,7 @@ import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections; // Make sure this import is present
+import java.util.Collections; 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +56,7 @@ public class ChatActivity extends AppCompatActivity {
     private ListenerRegistration messagesListener;
 
     private String currentUserId;
-    private String currentUserName; // To store the current user's name
+    private String currentUserName; 
     private String chatPartnerId;
     private String chatPartnerName;
     private String chatRoomId;
@@ -202,19 +202,19 @@ public class ChatActivity extends AppCompatActivity {
                             message.setMessageId(dc.getDocument().getId());
                             newBatchOfMessages.add(message);
                         }
-                        // Handle MODIFIED or REMOVED if needed for your app logic
+                       
                     }
 
                     if (!newBatchOfMessages.isEmpty()) {
                         Map<String, DirectMessage> messageMap = new HashMap<>();
-                        // Add existing messages from messagesList to map to handle potential re-adds by listener
+                        
                         for (DirectMessage msg : messagesList) {
                             messageMap.put(msg.getMessageId(), msg);
                         }
-                        // Add/update with new messages from the current snapshot
+                        
                         for (DirectMessage msg : newBatchOfMessages) {
                             messageMap.put(msg.getMessageId(), msg);
-                            newMessagesAddedToList = true; // Mark that we are actually adding/updating based on new data
+                            newMessagesAddedToList = true; 
                         }
 
                         if(newMessagesAddedToList){
@@ -267,7 +267,7 @@ public class ChatActivity extends AppCompatActivity {
         chatRoomData.put("lastMessageSenderId", currentUserId);
 
         List<String> participantIdsList = new ArrayList<>(Arrays.asList(currentUserId, chatPartnerId));
-        Collections.sort(participantIdsList); // <<< --- ENSURED THIS LINE IS ACTIVE --- >>>
+        Collections.sort(participantIdsList); 
         chatRoomData.put("participantIds", participantIdsList);
 
         Map<String, String> participantNamesMap = new HashMap<>();

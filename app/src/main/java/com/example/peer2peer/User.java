@@ -7,17 +7,17 @@ import com.google.firebase.firestore.ServerTimestamp;
 
 public class User {
     @DocumentId
-    private String uid; // Will be auto-populated by Firestore with document ID
+    private String uid; 
 
     private String email;
-    private String role; // "Tutor" or "Tutee"
+    private String role; 
     private boolean isBlocked = false;
-    private boolean profileComplete = false; // Default for new users
+    private boolean profileComplete = false; 
     private String fcmToken;
     @ServerTimestamp
     private Timestamp createdAt;
-    private String profileStatus; // e.g., "pending_verification", "verified", "rejected" (mainly for tutors)
-    private String name; // Common field for display name
+    private String profileStatus; 
+    private String name; 
 
     public User() {
         // Firestore no-arg constructor
@@ -27,9 +27,8 @@ public class User {
     public String getUid() { return uid; }
     public String getEmail() { return email; }
     public String getRole() { return role; }
-    @PropertyName("isBlocked") // Matches Firestore field if it's "isBlocked"
-    public boolean getIsBlocked() { return isBlocked; } // Changed to getIsBlocked for consistency
-    @PropertyName("profileComplete") // Matches Firestore field
+    @PropertyName("isBlocked") 
+    @PropertyName("profileComplete") 
     public boolean isProfileComplete() { return profileComplete; }
     public String getFcmToken() { return fcmToken; }
     public Timestamp getCreatedAt() { return createdAt; }
@@ -42,7 +41,7 @@ public class User {
     public void setEmail(String email) { this.email = email; }
     public void setRole(String role) { this.role = role; }
     @PropertyName("isBlocked")
-    public void setIsBlocked(boolean blocked) { isBlocked = blocked; } // Changed to setIsBlocked
+    public void setIsBlocked(boolean blocked) { isBlocked = blocked; }
     @PropertyName("profileComplete")
     public void setProfileComplete(boolean profileComplete) { this.profileComplete = profileComplete; }
     public void setFcmToken(String fcmToken) { this.fcmToken = fcmToken; }

@@ -8,13 +8,12 @@ public class ChatRoomSummary {
     private String chatRoomId;
     private String otherParticipantId;
     private String otherParticipantName;
-    private String otherParticipantProfileImageUrl; // Optional: for displaying profile picture
+    private String otherParticipantProfileImageUrl; 
     private String lastMessageText;
     private Date lastMessageTimestamp;
-    // private int unreadCount; // Optional: for unread message badges
+    
 
-    // Required empty public constructor for Firestore or other deserialization if needed,
-    // though this class is primarily for client-side use by the adapter.
+    
     public ChatRoomSummary() {
     }
 
@@ -51,19 +50,12 @@ public class ChatRoomSummary {
         return lastMessageText;
     }
 
-    // Firestore might populate this with @ServerTimestamp if this model were directly saved,
-    // but here it's more likely to be populated from a Date object read from Firestore.
+    
     public Date getLastMessageTimestamp() {
         return lastMessageTimestamp;
     }
 
-    /*
-    public int getUnreadCount() {
-        return unreadCount;
-    }
-    */
-
-    // Setters (can be useful)
+    
     public void setChatRoomId(String chatRoomId) {
         this.chatRoomId = chatRoomId;
     }
@@ -88,9 +80,5 @@ public class ChatRoomSummary {
         this.lastMessageTimestamp = lastMessageTimestamp;
     }
 
-    /*
-    public void setUnreadCount(int unreadCount) {
-        this.unreadCount = unreadCount;
-    }
-    */
+   
 }

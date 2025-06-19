@@ -2,7 +2,7 @@ package com.example.peer2peer;
 
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable; // Keep this if needed later
+import androidx.annotation.Nullable; 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,13 +19,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-// Removed duplicate Toast import
 
-// Import the adapter and Booking model
+
+
 import com.example.peer2peer.adapters.BookingListAdapter;
 import com.example.peer2peer.Booking;
 
-// Keep necessary Firebase imports
+
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,9 +42,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-// Removed unused imports like Comparator, OnCompleteListener, Task, Objects
 
-// --- MODIFIED: Implement the single listener interface ---
+
+
 public class TutorScheduleActivity extends AppCompatActivity implements BookingListAdapter.OnBookingInteractionListener {
 
     private static final String TAG = "TutorScheduleActivity";
@@ -116,16 +116,16 @@ public class TutorScheduleActivity extends AppCompatActivity implements BookingL
 
     @Override
     public void onJoinMeetingClick(String meetingLink) {
-        // Not used in this activity, but must be implemented
+       
         Log.w(TAG, "onJoinMeetingClick called unexpectedly in TutorScheduleActivity");
     }
 
     @Override
     public void onRateSessionClick(Booking booking) {
-        // Not used in this activity, but must be implemented
+       
         Log.w(TAG, "onRateSessionClick called unexpectedly in TutorScheduleActivity");
     }
-    // --- End listener method implementations ---
+    
 
 
     @Override
@@ -138,14 +138,13 @@ public class TutorScheduleActivity extends AppCompatActivity implements BookingL
     }
 
     private void fetchScheduledBookings() {
-        // Keep your existing fetchScheduledBookings logic
+        
         Log.d(TAG, "Fetching schedule for tutor: " + currentUser.getUid());
         showLoading(true);
 
         db.collection("bookings")
                 .whereEqualTo("tutorUid", currentUser.getUid())
-                .orderBy("startTime", Query.Direction.ASCENDING) // Keep ascending for upcoming sort
-                .get()
+                .orderBy("startTime", Query.Direction.ASCENDING)
                 .addOnCompleteListener(task -> {
                     showLoading(false);
                     if (task.isSuccessful()) {
@@ -286,4 +285,4 @@ public class TutorScheduleActivity extends AppCompatActivity implements BookingL
         }
     }
 
-} // End of Activity
+} 

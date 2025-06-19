@@ -1,6 +1,6 @@
-package com.example.peer2peer; // Ensure this matches your package
+package com.example.peer2peer;
 
-// --- Android Core Imports ---
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;

@@ -12,8 +12,8 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.peer2peer.fragments.TutorProfileStep1Fragment; // Import the fragment
-import com.example.peer2peer.viewmodels.TutorProfileViewModel; // Import the ViewModel
+import com.example.peer2peer.fragments.TutorProfileStep1Fragment; 
+import com.example.peer2peer.viewmodels.TutorProfileViewModel; 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -28,7 +28,7 @@ public class TuteeProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "TuteeProfileActivity";
 
-    private TutorProfileViewModel viewModel; // Use the same ViewModel
+    private TutorProfileViewModel viewModel;
     private Button buttonSave;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
@@ -40,7 +40,7 @@ public class TuteeProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutee_profile);
 
-        // Initialize ViewModel scoped to THIS Activity
+        
         viewModel = new ViewModelProvider(this).get(TutorProfileViewModel.class);
 
         // Initialize Firebase
@@ -114,32 +114,23 @@ public class TuteeProfileActivity extends AppCompatActivity {
         }
         String userId = currentUser.getUid();
 
-        // --- Basic Validation (Example: ensure gender/race selected if required) ---
-        // You might want more robust validation by accessing the fragment's isValid method if you implement one
+        
         String selectedGender = viewModel.getGender().getValue();
         String selectedRace = viewModel.getRace().getValue();
-        // Add checks if these fields are mandatory for tutees
-        // if (TextUtils.isEmpty(selectedGender) || TextUtils.isEmpty(selectedRace)) {
-        //     Toast.makeText(this, "Please select Gender and Race.", Toast.LENGTH_SHORT).show();
-        //     return;
-        // }
-        // --- End Validation ---
-
-        // Ensure progressBar is not null before using
+        
         if(progressBar != null) progressBar.setVisibility(View.VISIBLE);
         if(buttonSave != null) buttonSave.setEnabled(false);
 
         // Data to save/update in Firestore
         Map<String, Object> profileUpdate = new HashMap<>();
         profileUpdate.put("profileComplete", true); // Mark profile as complete
-        // Optionally save Gender/Race selections if they were made/changed
-        // Check if values are different from initial load if necessary, or just save current VM state
+        
         if(selectedGender != null) profileUpdate.put("gender", selectedGender);
         if(selectedRace != null) profileUpdate.put("race", selectedRace);
-        // If profile picture was added/changed, handle upload and save URL separately (more complex)
+        
 
         db.collection("users").document(userId)
-                .set(profileUpdate, SetOptions.merge()) // Merge to update only specific fields
+                .set(profileUpdate, SetOptions.merge()) 
                 .addOnSuccessListener(aVoid -> {
                     Log.d(TAG, "Tutee profile marked as complete.");
                     if(progressBar != null) progressBar.setVisibility(View.GONE);

@@ -1,6 +1,6 @@
-package com.example.peer2peer; // Your package name
+package com.example.peer2peer; 
 
-// Imports
+
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -19,22 +19,21 @@ import com.google.android.material.timepicker.TimeFormat;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-//import com.google.firebase.firestore.DocumentSnapshot; // Not directly used in this version but fine to keep
+
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import com.example.peer2peer.adapters.ManageAvailabilityTimeSlotAdapter;
-import com.example.peer2peer.TimeSlot; // Ensure your TimeSlot model is imported
+import com.example.peer2peer.TimeSlot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-// import java.util.Date; // Not strictly needed if using Calendar.getTime() for Timestamps
-// import java.util.HashMap; // Not used in this version
+
 import java.util.List;
 import java.util.Locale;
-// import java.util.Map; // Not used in this version
+
 import java.util.TimeZone;
 
 
@@ -42,7 +41,7 @@ public class ManageAvailabilityActivity extends AppCompatActivity implements Man
 
     private static final String TAG = "ManageAvailability";
 
-    // UI Elements
+   
     private CalendarView calendarView;
     private TextView textViewSelectedDate;
     private RecyclerView recyclerViewTimeSlots;
@@ -57,15 +56,15 @@ public class ManageAvailabilityActivity extends AppCompatActivity implements Man
     // Date Handling
     private Calendar selectedDate;
     @SuppressWarnings("deprecation")
-    private SimpleDateFormat dateFormatter; // For displaying the selected date
+    private SimpleDateFormat dateFormatter; 
 
-    // RecyclerView Components
+    
     private ManageAvailabilityTimeSlotAdapter timeSlotAdapter;
-    private List<TimeSlot> timeSlotsList; // This list will be used for validation
+    private List<TimeSlot> timeSlotsList; 
 
     // For Module Spinner
-    private List<String> tutorModulesDisplayList; // List to hold module codes for the spinner
-    private ArrayAdapter<String> moduleAdapter;   // Adapter for the spinner
+    private List<String> tutorModulesDisplayList; 
+    private ArrayAdapter<String> moduleAdapter;   
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,7 +166,7 @@ public class ManageAvailabilityActivity extends AppCompatActivity implements Man
                 });
     }
 
-    // This method was present in your original code, kept for completeness
+    
     private boolean isDateBefore(Calendar date1, Calendar date2) {
         Calendar cal1 = (Calendar) date1.clone();
         cal1.set(Calendar.HOUR_OF_DAY, 0); cal1.set(Calendar.MINUTE, 0); cal1.set(Calendar.SECOND, 0); cal1.set(Calendar.MILLISECOND, 0);
@@ -221,7 +220,7 @@ public class ManageAvailabilityActivity extends AppCompatActivity implements Man
                                 } else { Log.w(TAG, "Fetched null slot data for doc ID: " + document.getId()); }
                             } catch (Exception e) { Log.e(TAG, "Error parsing TimeSlot from document: " + document.getId(), e); }
                         }
-                        // Update the local list used for validation and the adapter
+                 
                         timeSlotsList.clear();
                         timeSlotsList.addAll(fetchedSlots);
                         runOnUiThread(() -> {

@@ -1,4 +1,4 @@
-// In app/src/main/java/com/example/peer2peer/Resource.java
+
 package com.example.peer2peer;
 
 import com.google.firebase.Timestamp;

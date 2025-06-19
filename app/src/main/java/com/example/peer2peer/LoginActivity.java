@@ -1,4 +1,4 @@
-package com.example.peer2peer; // Ensure this matches your package
+package com.example.peer2peer; 
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-// Firebase and Task imports
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -24,19 +24,19 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue; // <-- ADDED IMPORT
+import com.google.firebase.firestore.FieldValue; 
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions; // <-- ADDED IMPORT
-import com.google.firebase.messaging.FirebaseMessaging; // <-- ADDED IMPORT
+import com.google.firebase.firestore.SetOptions; 
+import com.google.firebase.messaging.FirebaseMessaging; 
 
-import java.util.HashMap; // <-- ADDED IMPORT
-import java.util.Map;    // <-- ADDED IMPORT
+import java.util.HashMap; 
+import java.util.Map;    
 
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "LoginActivity";
 
-    // UI Elements
+   
     private Toolbar toolbar;
     private TextInputEditText editTextEmail;
     private TextInputEditText editTextPassword;
@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView textViewForgotPassword, textViewSignUpLink;
     private ProgressBar progressBar;
 
-    // Firebase
+
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            // Navigate back to MainActivity, clear other activities on top of it.
+           
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             startActivity(intent);
@@ -165,19 +165,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void fetchUserDataAndNavigate(String userId) {
-        // progressBar is typically already visible from performLogin
-        // progressBar.setVisibility(View.VISIBLE);
-
+       
         DocumentReference userDocRef = db.collection("users").document(userId);
         userDocRef.get().addOnCompleteListener(task -> {
-            // Don't hide progress bar or enable button yet, wait for token logic
+           
 
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document != null && document.exists()) {
                     String firestoreRole = document.getString("role");
-                    String status = document.getString("profileStatus"); // Assuming you have this field
-                    boolean profileComplete = Boolean.TRUE.equals(document.getBoolean("profileComplete")); // Assuming this field
+                    String status = document.getString("profileStatus"); 
+                    boolean profileComplete = Boolean.TRUE.equals(document.getBoolean("profileComplete")); 
 
                     Log.d(TAG, "User data fetched: Firestore Role=" + firestoreRole + ", Expected Role=" + userRole);
 
@@ -190,11 +188,11 @@ public class LoginActivity extends AppCompatActivity {
                         return;
                     }
 
-                    // --- START: Get and Update FCM Token ---
+                    
                     FirebaseMessaging.getInstance().getToken()
                             .addOnCompleteListener(tokenTask -> {
-                                progressBar.setVisibility(View.GONE); // Hide progress bar after all async ops
-                                buttonLogin.setEnabled(true); // Re-enable login button here
+                                progressBar.setVisibility(View.GONE); 
+                                buttonLogin.setEnabled(true); 
 
                                 if (tokenTask.isSuccessful() && tokenTask.getResult() != null) {
                                     String fcmToken = tokenTask.getResult();
@@ -204,10 +202,10 @@ public class LoginActivity extends AppCompatActivity {
                                     Log.w(TAG, "Fetching FCM registration token failed or token was null", tokenTask.getException());
                                     Toast.makeText(LoginActivity.this, "Could not update notification service settings. Continuing login.", Toast.LENGTH_SHORT).show();
                                 }
-                                // Navigate after attempting token update
+                                
                                 navigateToDashboard(firestoreRole, status, profileComplete);
                             });
-                    // --- END: Get and Update FCM Token ---
+                   
 
                 } else {
                     Log.e(TAG, "No user document found in Firestore for userId: " + userId);
@@ -226,7 +224,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    // Helper method to update FCM token in Firestore
+
     private void updateFcmTokenInFirestore(String userId, String token) {
         if (userId == null || token == null) {
             Log.w(TAG, "User ID or FCM token is null for Firestore update.");
@@ -249,17 +247,14 @@ public class LoginActivity extends AppCompatActivity {
             if ("pending_verification".equals(status) || "pending_review".equals(status)) {
                 intent = new Intent(this, VerificationPendingActivity.class);
             } else if ("verified".equals(status)) {
-                // Check if profile is complete for verified tutors
-                // if (!profileComplete) { // Assuming 'profileComplete' is also relevant for tutors
-                //     intent = new Intent(this, TutorProfileWizardActivity.class);
-                // } else {
+                
                 intent = new Intent(this, TutorDashboardActivity.class);
                 // }
-            } else { // Default to profile wizard if status is unclear or incomplete
+            } else { 
                 intent = new Intent(this, TutorProfileWizardActivity.class);
             }
         } else if (MainActivity.ROLE_TUTEE.equals(actualRole)) {
-            // Tutee navigation logic seems to depend on profileComplete directly
+            
             if (profileComplete) {
                 intent = new Intent(this, TuteeDashboardActivity.class);
             } else {
@@ -276,12 +271,12 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-            finish(); // Finish LoginActivity so user can't go back to it from dashboard
+            finish(); 
         } else {
-            // This case should ideally not be reached if logic above is sound
+            
             Log.e(TAG, "Navigation intent was null after role/status check. Role: " + actualRole + ", Status: " + status);
             Toast.makeText(this, "Login failed: Could not determine navigation path.", Toast.LENGTH_SHORT).show();
-            mAuth.signOut(); // Ensure user is signed out if navigation fails
+            mAuth.signOut();
         }
     }
 }

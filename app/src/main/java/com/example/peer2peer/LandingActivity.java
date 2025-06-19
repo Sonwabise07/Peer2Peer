@@ -15,14 +15,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LandingActivity extends AppCompatActivity {
 
-    private static final long BUTTON_ANIMATION_DELAY = 1000; // 1 second delay before button animates in
+    private static final long BUTTON_ANIMATION_DELAY = 1000; 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
 
-        // Optional: Hide action bar for a full-screen feel
+       
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
@@ -32,24 +32,24 @@ public class LandingActivity extends AppCompatActivity {
         TextView textTagline = findViewById(R.id.text_welcome_tagline);
         Button getStartedButton = findViewById(R.id.button_get_started_landing);
 
-        // Initially hide button to animate it in
+       
         getStartedButton.setVisibility(View.INVISIBLE);
 
-        // Load animations (optional, but adds a nice touch)
+      
         Animation fadeIn = AnimationUtils.loadAnimation(this, android.R.anim.fade_in);
         fadeIn.setDuration(1000); // 1 second fade in
 
-        Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up_button); // You'll need to create this animation
+        Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up_button); 
         slideUp.setDuration(700);
 
 
-        // Start animations for text elements
+       
         if (appLogo != null) appLogo.startAnimation(fadeIn);
         textWelcome.startAnimation(fadeIn);
         textTagline.startAnimation(fadeIn);
 
 
-        // Delayed animation for the button
+       
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             getStartedButton.setVisibility(View.VISIBLE);
             getStartedButton.startAnimation(slideUp);
@@ -57,10 +57,10 @@ public class LandingActivity extends AppCompatActivity {
 
 
         getStartedButton.setOnClickListener(v -> {
-            // Replace MainActivity.class with the actual class name of your role selection/login screen
+           
             Intent intent = new Intent(LandingActivity.this, MainActivity.class);
             startActivity(intent);
-            // Finish LandingActivity so the user cannot navigate back to it
+          
             finish();
         });
     }

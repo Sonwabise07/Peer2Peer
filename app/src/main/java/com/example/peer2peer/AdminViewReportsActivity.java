@@ -1,6 +1,6 @@
 package com.example.peer2peer;
 
-import android.content.DialogInterface; // Added for AlertDialog
+import android.content.DialogInterface; 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,19 +11,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog; // Added for AlertDialog
+import androidx.appcompat.app.AlertDialog; 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.peer2peer.adapters.ReportListAdapter; // Your adapter import
+import com.example.peer2peer.adapters.ReportListAdapter;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.Timestamp; // For formatting timestamp from Report object
+import com.google.firebase.Timestamp; 
 
-import java.text.SimpleDateFormat; // For formatting timestamp
+import java.text.SimpleDateFormat; 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -84,9 +84,7 @@ public class AdminViewReportsActivity extends AppCompatActivity implements Repor
                         if (task.getResult() != null && !task.getResult().isEmpty()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Report report = document.toObject(Report.class);
-                                // @DocumentId in Report.java should handle setting reportId.
-                                // If report.getReportId() is null, you might need:
-                                // report.setReportId(document.getId());
+                                
                                 fetchedReports.add(report);
                             }
                             Log.d(TAG, "Fetched " + fetchedReports.size() + " reports.");
@@ -123,7 +121,7 @@ public class AdminViewReportsActivity extends AppCompatActivity implements Repor
         Log.d(TAG, "Report clicked: " + (report.getReportId() != null ? report.getReportId() : "ID N/A") +
                 " Reported Tutor: " + (report.getReportedTutorName() != null ? report.getReportedTutorName() : report.getReportedTutorUid()));
 
-        // Show details in an AlertDialog
+        
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Report Details");
 
@@ -148,29 +146,24 @@ public class AdminViewReportsActivity extends AppCompatActivity implements Repor
 
         builder.setPositiveButton("OK", (dialog, which) -> dialog.dismiss());
 
-        // Neutral button to navigate to the reported tutor's detail page for action (e.g., block)
+        
         builder.setNeutralButton("View Tutor Profile", (dialog, which) -> {
             Intent intent = new Intent(AdminViewReportsActivity.this, AdminUserDetailActivity.class);
             intent.putExtra(AdminUserDetailActivity.EXTRA_USER_UID, report.getReportedTutorUid());
             startActivity(intent);
         });
 
-        // Negative button to take action (Placeholder for now)
-        // For presentation, you can just mention that admin would take action here.
-        // For actual implementation, you might have "Mark as Resolved", "Block Tutor (via profile)", etc.
-        // builder.setNegativeButton("Take Action", (dialog, which) -> {
-        //     Toast.makeText(AdminViewReportsActivity.this, "Admin would take action here.", Toast.LENGTH_SHORT).show();
-        // });
+       
 
         builder.show();
     }
 
-    // Helper to capitalize first letter of each word, and replace underscores
+   
     private String capitalize(String str) {
         if (str == null || str.isEmpty()) {
             return "";
         }
-        str = str.replace("_", " "); // Replace underscores with spaces first
+        str = str.replace("_", " "); 
         String[] parts = str.split(" ");
         StringBuilder capitalized = new StringBuilder();
         for (String part : parts) {
@@ -186,7 +179,7 @@ public class AdminViewReportsActivity extends AppCompatActivity implements Repor
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish(); // Go back to the AdminDashboardActivity
+            finish(); 
             return true;
         }
         return super.onOptionsItemSelected(item);

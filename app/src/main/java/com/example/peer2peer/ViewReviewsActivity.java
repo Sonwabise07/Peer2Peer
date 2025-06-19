@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.peer2peer.adapters.ReviewListAdapter; // Import the new adapter
+import com.example.peer2peer.adapters.ReviewListAdapter; 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -24,8 +24,8 @@ import java.util.List;
 public class ViewReviewsActivity extends AppCompatActivity {
 
     private static final String TAG = "ViewReviewsActivity";
-    public static final String EXTRA_TUTOR_UID = "EXTRA_TUTOR_UID"; // Key for intent extra
-    public static final String EXTRA_TUTOR_NAME = "EXTRA_TUTOR_NAME"; // Key for intent extra
+    public static final String EXTRA_TUTOR_UID = "EXTRA_TUTOR_UID"; 
+    public static final String EXTRA_TUTOR_NAME = "EXTRA_TUTOR_NAME";
 
     private String tutorUid;
     private String tutorName;
@@ -128,9 +128,9 @@ public class ViewReviewsActivity extends AppCompatActivity {
 
     private void showLoading(boolean isLoading) {
         progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
-        // Hide/show list based on loading state only if list is not empty
+        
         recyclerViewReviews.setVisibility(isLoading ? View.GONE : (reviewList.isEmpty() ? View.GONE : View.VISIBLE));
-        // Hide/show empty text based on loading state only if list is empty
+        
         textViewNoReviews.setVisibility(isLoading ? View.GONE : (reviewList.isEmpty() ? View.VISIBLE : View.GONE));
     }
 

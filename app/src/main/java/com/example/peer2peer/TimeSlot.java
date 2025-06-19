@@ -1,5 +1,5 @@
-// In app/src/main/java/com/example/peer2peer/TimeSlot.java
-package com.example.peer2peer; // Or your models package
+
+package com.example.peer2peer; 
 
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.Exclude;
@@ -14,20 +14,19 @@ public class TimeSlot {
     private Timestamp startTime;
     private Timestamp endTime;
     private String status;
-    private String moduleCode; // <-- NEW FIELD: Add moduleCode
+    private String moduleCode; 
 
-    // Required empty constructor for Firestore
     public TimeSlot() {}
 
-    // Optional: Update constructor for manual creation if needed
+   
     public TimeSlot(Timestamp startTime, Timestamp endTime, String status, String moduleCode) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.status = status;
-        this.moduleCode = moduleCode; // <-- Initialize moduleCode
+        this.moduleCode = moduleCode;
     }
 
-    // --- Getters (Needed by Firestore) ---
+    
     public Timestamp getStartTime() {
         return startTime;
     }
@@ -40,11 +39,11 @@ public class TimeSlot {
         return status;
     }
 
-    public String getModuleCode() { // <-- NEW GETTER for moduleCode
+    public String getModuleCode() { 
         return moduleCode;
     }
 
-    // --- Setters (Needed by Firestore) ---
+    
     public void setStartTime(Timestamp startTime) {
         this.startTime = startTime;
     }
@@ -85,7 +84,7 @@ public class TimeSlot {
         return start + " - " + end;
     }
 
-    // Optional: You might want a helper to display module code along with time
+    
     @Exclude
     public String getFormattedTimeRangeWithModule() {
         String timeRange = getFormattedTimeRange();

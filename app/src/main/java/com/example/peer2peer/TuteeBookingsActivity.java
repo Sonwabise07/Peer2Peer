@@ -1,10 +1,10 @@
 package com.example.peer2peer;
 
-// --- Android/Java Imports ---
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable; // Keep if used, or remove if not
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -288,18 +288,17 @@ public class TuteeBookingsActivity extends AppCompatActivity
     @Override
     public void onItemClick(Booking booking) {
         Log.d(TAG, "Booking item clicked: " + (booking != null ? booking.getDocumentId() : "null booking"));
-        // You can add navigation to a BookingDetailActivity here if you want
-        // For now, it's handled by specific button clicks (Join, Rate)
+        
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         Log.d(TAG, "onResume: Calling fetchBookingsForSelectedDate.");
-        fetchBookingsForSelectedDate(); // Refresh bookings when activity resumes
+        fetchBookingsForSelectedDate(); 
     }
 
-    // Helper to capitalize first letter (if you don't have it in a utility class)
+    
     private String capitalize(String str) {
         if (str == null || str.isEmpty()) {
             return "";

@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.appcompat.widget.SearchView; // Use androidx version
+import androidx.appcompat.widget.SearchView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,8 +25,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale; // Added for lowercase conversion
-
+import java.util.Locale; 
 // Implement the listener interface from the adapter
 public class AdminUserManagementActivity extends AppCompatActivity implements AdminUserListAdapter.OnUserClickListener {
 
@@ -118,16 +117,14 @@ public class AdminUserManagementActivity extends AppCompatActivity implements Ad
         }
     }
 
-    // --- *** THIS METHOD IS UPDATED *** ---
-    // Fetch ALL users initially (ordered by email)
+    
     private void fetchAllUsersFromFirestore() {
         // --- Order by 'email' instead of 'fullName' ---
         Log.d(TAG, "Fetching ALL users from Firestore (ordered by email)...");
         showLoading(true);
 
-        // Query: Fetch all documents from 'users' collection ordered by 'email'
-        // Query query = db.collection("users").orderBy("fullName", Query.Direction.ASCENDING); // Old query using non-existent field
-        Query query = db.collection("users").orderBy("email", Query.Direction.ASCENDING); // Corrected query
+       
+        Query query = db.collection("users").orderBy("email", Query.Direction.ASCENDING); 
 
         query.get()
                 .addOnCompleteListener(task -> {
@@ -138,14 +135,14 @@ public class AdminUserManagementActivity extends AppCompatActivity implements Ad
 
                     if (task.isSuccessful() && task.getResult() != null) {
                         documentCount = task.getResult().size();
-                        // *** Check this log message carefully when you run ***
+                       
                         Log.d(TAG, "Firestore query successful (ordered by email), fetched " + documentCount + " documents.");
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             try {
                                 Tutor user = document.toObject(Tutor.class);
-                                // Add the missing 'fullName' locally for display/search if needed
+                             
                                 if (user != null) {
-                                    // Combine first and last name if fullName isn't set by default from Firestore
+                                  
                                     if (user.getFullName() == null || user.getFullName().isEmpty()) {
                                         String first = user.getFirstName() != null ? user.getFirstName() : "";
                                         String last = user.getSurname() != null ? user.getSurname() : "";
@@ -156,7 +153,7 @@ public class AdminUserManagementActivity extends AppCompatActivity implements Ad
                                 if (user != null && user.getUid() != null && !user.getUid().isEmpty()) {
                                     allUsersList.add(user);
                                     parsedCount++;
-                                    // Log name AFTER potentially setting it locally
+                                   
                                     Log.d(TAG, "Parsed user: " + user.getEmail() + ", Name: " + user.getFullName() + ", UID: " + user.getUid());
                                 } else {
                                     Log.w(TAG, "Skipping user document - parsing failed or UID missing. Doc ID: " + document.getId());
@@ -174,9 +171,7 @@ public class AdminUserManagementActivity extends AppCompatActivity implements Ad
                     filterUserList(searchView.getQuery().toString());
                 });
     }
-    // --- *** END OF UPDATED METHOD *** ---
-
-    // Filter the displayed list based on search text (checks name and email)
+    
     private void filterUserList(String searchText) {
         String lowerCaseSearchText = searchText.toLowerCase(Locale.getDefault()).trim();
         filteredUserList.clear();

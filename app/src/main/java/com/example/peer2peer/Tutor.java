@@ -5,11 +5,11 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentId;
-import com.google.firebase.firestore.PropertyName; // Make sure this import is present
+import com.google.firebase.firestore.PropertyName; 
 import com.google.firebase.firestore.ServerTimestamp;
 import java.util.Date;
 import java.util.List;
-// import java.util.ArrayList; // Only if you explicitly use new ArrayList<>() in constructors not shown
+
 
 public class Tutor implements Parcelable {
 
@@ -54,18 +54,17 @@ public class Tutor implements Parcelable {
     private String rejectionReason;
     private String role;
     private String lowercaseEmail;
-    private boolean isBlocked; // Field is present
-
+    private boolean isBlocked; 
     private String fcmToken;
     @ServerTimestamp
     private Timestamp fcmTokenLastUpdated;
 
 
     public Tutor() {
-        // Firestore needs a public no-argument constructor
+        
     }
 
-    // --- Getters ---
+    
     public String getUid() { return uid; }
     public String getUserId() { return userId; }
     public String getFirstName() { return firstName; }

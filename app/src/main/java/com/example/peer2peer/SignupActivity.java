@@ -1,4 +1,4 @@
-package com.example.peer2peer; // Replace with your actual package name
+package com.example.peer2peer; 
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,9 +25,9 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FieldValue; // <-- ADDED IMPORT
+import com.google.firebase.firestore.FieldValue; 
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.messaging.FirebaseMessaging; // <-- ADDED IMPORT
+import com.google.firebase.messaging.FirebaseMessaging; 
 
 import java.util.HashMap;
 import java.util.Map;
@@ -103,7 +103,7 @@ public class SignupActivity extends AppCompatActivity {
         buttonSignup.setOnClickListener(v -> registerUser());
         textViewLoginLink.setOnClickListener(v -> {
             Intent loginIntent = new Intent(SignupActivity.this, LoginActivity.class);
-            if (!"unknown".equals(userRole)) { // Pass role if known
+            if (!"unknown".equals(userRole)) { 
                 loginIntent.putExtra(MainActivity.EXTRA_USER_ROLE, userRole);
             }
             startActivity(loginIntent);
@@ -112,7 +112,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private void registerUser() {
-        // ... (keep your existing validation logic for all fields) ...
+       ..
         final String firstName = String.valueOf(editTextFirstName.getText()).trim();
         final String surname = String.valueOf(editTextSurname.getText()).trim();
         final String studentId = String.valueOf(editTextStudentId.getText()).trim();
@@ -154,8 +154,7 @@ public class SignupActivity extends AppCompatActivity {
                                             Log.d(TAG, "FCM Token fetched for new user: " + fcmToken);
                                         } else {
                                             Log.w(TAG, "Fetching FCM registration token failed for new user", tokenTask.getException());
-                                            // Token fetching failed, proceed without it for now. onNewToken might catch it later.
-                                        }
+                                            
                                         // Proceed to save user data, with or without token
                                         saveUserDataToFirestore(firebaseUser, firstName, surname, studentId, email, this.userRole, fcmToken);
                                         sendEmailVerification(firebaseUser); // Call this after attempting to save data
@@ -216,9 +215,7 @@ public class SignupActivity extends AppCompatActivity {
                 .addOnSuccessListener(aVoid -> Log.d(TAG, "User data successfully written to Firestore! Role: " + role + ", UID: " + userId))
                 .addOnFailureListener(e -> {
                     Log.w(TAG, "Error writing user data to Firestore", e);
-                    // This is critical, if user data isn't saved, their role etc. won't be known.
-                    // Consider deleting the auth user if firestore save fails to allow re-registration
-                    // or provide more specific error message.
+                    
                     Toast.makeText(SignupActivity.this, "Registration succeeded but profile creation failed. Please contact support.", Toast.LENGTH_LONG).show();
                 });
     }

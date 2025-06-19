@@ -2,23 +2,22 @@ package com.example.peer2peer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar; // Import Toolbar
+import androidx.appcompat.widget.Toolbar; 
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.MenuItem; // Import MenuItem for back arrow
+import android.view.MenuItem; 
 import android.view.View;
 import android.widget.Button;
-// import android.widget.EditText; // Not used if TextInputEditText is used
+
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-// import com.google.android.gms.tasks.OnCompleteListener; // Not directly used
-// import com.google.android.gms.tasks.Task; // Not directly used
-import com.google.android.material.textfield.TextInputEditText; // Import TextInputEditText
-// import com.google.firebase.auth.AuthResult; // Not directly used
+
+import com.google.android.material.textfield.TextInputEditText; 
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
@@ -31,7 +30,7 @@ public class AdminLoginActivity extends AppCompatActivity {
 
     private static final String TAG = "AdminLoginActivity";
 
-    // UI Elements
+   
     private TextInputEditText editTextEmail;
     private TextInputEditText editTextPassword;
     private Button buttonLogin;
@@ -50,7 +49,7 @@ public class AdminLoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         // Initialize UI Elements
-        toolbar = findViewById(R.id.toolbar_admin_login); // Ensure this ID is in your layout
+        toolbar = findViewById(R.id.toolbar_admin_login); 
         editTextEmail = findViewById(R.id.edit_text_admin_email);
         editTextPassword = findViewById(R.id.edit_text_admin_password);
         buttonLogin = findViewById(R.id.button_admin_login);
@@ -59,20 +58,20 @@ public class AdminLoginActivity extends AppCompatActivity {
         // Setup Toolbar
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Show back arrow
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); 
             getSupportActionBar().setDisplayShowHomeEnabled(true);
-            getSupportActionBar().setTitle("Admin Login"); // Set a title for consistency
+            getSupportActionBar().setTitle("Admin Login"); 
         }
 
-        // Set Login Button Listener
+        
         buttonLogin.setOnClickListener(v -> attemptAdminLogin());
     }
 
-    // Handle Toolbar back arrow click
+    
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish(); // Close this activity, go back to MainActivity
+            finish(); 
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -99,13 +98,12 @@ public class AdminLoginActivity extends AppCompatActivity {
             return;
         }
 
-        showLoading(true); // Show progress, disable button
+        showLoading(true);
 
         // Sign in with Firebase Auth
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
-                    // No need to hide progress bar here if checkAdminClaim also shows/hides it
-                    // showLoading(false) will be called within checkAdminClaim or if this initial task fails.
+                    
 
                     if (task.isSuccessful()) {
                         Log.d(TAG, "Admin signInWithEmail:success");
@@ -138,12 +136,11 @@ public class AdminLoginActivity extends AppCompatActivity {
     }
 
     private void checkAdminClaim(FirebaseUser user) {
-        // showLoading(true) was called before signInWithEmailAndPassword,
-        // so progress bar is already visible. It will be hidden after this check.
+       .
         Log.d(TAG, "checkAdminClaim: Attempting to force refresh ID token...");
         user.getIdToken(true)
                 .addOnCompleteListener(task -> {
-                    showLoading(false); // Hide progress bar after token check attempt
+                    showLoading(false);
 
                     if (task.isSuccessful()) {
                         Log.d(TAG, "checkAdminClaim: Token refresh successful.");
@@ -162,7 +159,7 @@ public class AdminLoginActivity extends AppCompatActivity {
                                 Toast.makeText(AdminLoginActivity.this, "Admin Login Successful", Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(AdminLoginActivity.this, AdminDashboardActivity.class);
-                                // These flags make AdminDashboardActivity the new root of the task.
+                                
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
                                 finish(); // Finish AdminLoginActivity

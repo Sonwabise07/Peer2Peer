@@ -1,8 +1,8 @@
-package com.example.peer2peer; // Ensure this matches your package
+package com.example.peer2peer; 
 
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentId;
-import com.google.firebase.firestore.PropertyName; // Make sure this import is present
+import com.google.firebase.firestore.PropertyName; 
 import com.google.firebase.firestore.ServerTimestamp;
 
 public class Report {
@@ -14,7 +14,7 @@ public class Report {
     private String reportedTutorUid;
     private String reportedTutorName;
     private String reasonCategory;
-    private String reasonDetails; // **** CORRECTED FIELD NAME ****
+    private String reasonDetails; 
     @ServerTimestamp
     private Timestamp timestamp;
     private String reportStatus;

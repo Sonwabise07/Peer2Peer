@@ -1,12 +1,12 @@
 package com.example.peer2peer;
 
-// Android & UI Imports
-import android.app.AlarmManager; // <-- Ensure this is imported
-import android.content.Context;    // <-- Ensure this is imported (though often implicitly available)
+
+import android.app.AlarmManager; 
+import android.content.Context;    
 import android.content.Intent;
-import android.os.Build;          // <-- Ensure this is imported
+import android.os.Build;          
 import android.os.Bundle;
-import android.provider.Settings;  // <-- Ensure this is imported
+import android.provider.Settings;  
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,7 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable; // For onActivityResult
+import androidx.annotation.Nullable; 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,7 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 // Firebase Imports
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser; // For fetching current user
+import com.google.firebase.auth.FirebaseUser; 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -39,8 +39,8 @@ import com.google.firebase.functions.HttpsCallableResult;
 // Your App's Model and Adapter classes
 import com.example.peer2peer.adapters.TimeSlotAdapter;
 import com.example.peer2peer.TimeSlot;
-import com.example.peer2peer.Booking;         // <-- Ensure this is imported
-import com.example.peer2peer.AlarmScheduler;  // <-- Import your AlarmScheduler
+import com.example.peer2peer.Booking;         
+import com.example.peer2peer.AlarmScheduler;  
 
 // Java Util Imports
 import java.text.SimpleDateFormat;
@@ -66,7 +66,7 @@ public class SelectSlotActivity extends AppCompatActivity {
 
     private static final String TAG = "SelectSlotActivity";
     public static final String EXTRA_TUTOR_UID = "TUTOR_UID";
-    public static final String EXTRA_TUTOR_NAME = "TUTOR_NAME"; // To get tutor's name for booking object
+    public static final String EXTRA_TUTOR_NAME = "TUTOR_NAME"; 
 
     // UI Elements
     private CalendarView calendarView;
@@ -87,7 +87,7 @@ public class SelectSlotActivity extends AppCompatActivity {
 
     // Date Handling
     private Calendar selectedCalendarDate;
-    private SimpleDateFormat dateFormatter; // Initialized in onCreate
+    private SimpleDateFormat dateFormatter; 
 
     // RecyclerView and Data
     private TimeSlotAdapter timeSlotAdapter;
@@ -385,8 +385,7 @@ public class SelectSlotActivity extends AppCompatActivity {
                         Log.e(TAG, "Failed to parse result from 'createPaymentIntent' function.", e);
                         handleFlowFailure("Payment Init Failed", "Error processing server response.");
                     }
-                    // Do not hide progress here, launchPaymentSheet will take over or onPaymentSheetResult will handle it
-                });
+                    
     }
 
     private void launchPaymentSheet() {
@@ -398,19 +397,16 @@ public class SelectSlotActivity extends AppCompatActivity {
 
         final PaymentSheet.Configuration configuration = new PaymentSheet.Configuration.Builder("Peer2Peer Tutoring")
                 .allowsDelayedPaymentMethods(false)
-                // .setDefaultBillingDetails(...) // Optional
+                /
                 .build();
         paymentSheet.presentWithPaymentIntent(paymentIntentClientSecret, configuration);
-        // Progress bar is hidden in onPaymentSheetResult
+        
     }
 
     private void onPaymentSheetResult(final PaymentSheetResult paymentSheetResult) {
-        String paymentIdToConfirm = currentPaymentIntentId; // Store before clearing
+        String paymentIdToConfirm = currentPaymentIntentId; 
 
-        // Clear sensitive state immediately after use or decision point
-        // paymentIntentClientSecret = null; // No, clear after decision
-        // currentPaymentIntentId = null; // No, clear after decision
-
+        
         if (paymentSheetResult instanceof PaymentSheetResult.Completed) {
             Log.i(TAG, "PaymentSheet reported Completed. Calling confirmBooking for PI ID: " + paymentIdToConfirm);
             Toast.makeText(this, "Payment Successful! Confirming booking...", Toast.LENGTH_SHORT).show();
@@ -444,15 +440,14 @@ public class SelectSlotActivity extends AppCompatActivity {
 
     private void callConfirmBookingFunction(String paymentIntentId) {
         Log.d(TAG, "Calling 'confirmBooking' function for PI ID: " + paymentIntentId);
-        showProgress(true, false); // Ensure booking progress is shown
-
+        showProgress(true, false); 
         Map<String, Object> data = new HashMap<>();
         data.put("paymentIntentId", paymentIntentId);
 
         mFunctions.getHttpsCallable("confirmBooking")
                 .call(data)
                 .addOnCompleteListener(task -> {
-                    // Clear these regardless of outcome now that confirmBooking is attempted
+                    
                     paymentIntentClientSecret = null;
                     currentPaymentIntentId = null;
 
@@ -499,20 +494,16 @@ public class SelectSlotActivity extends AppCompatActivity {
                                 newBooking.setTutorName(tutorNameFromIntent); // Passed via Intent or fetched
                                 FirebaseUser fbUser = mAuth.getCurrentUser();
                                 newBooking.setTuteeName(fbUser.getDisplayName() != null && !fbUser.getDisplayName().isEmpty() ? fbUser.getDisplayName() : "You");
-                                // Note: Other fields like rateCharged, currency, paymentIntentId are in the booking doc
-                                // created by the cloud function. If AlarmScheduler needs them, ensure they are set
-                                // here, or modify AlarmScheduler to not require them if they are only for display
-                                // in the booking list and not the alarm notification itself.
-                                // The current AlarmScheduler uses moduleCode, tutorName/tuteeName for the notification.
+                            
 
                                 Log.d(TAG, "Attempting to schedule reminder for booking: " + newBooking.getDocumentId());
                                 checkAndScheduleReminder(newBooking);
                             } else {
                                 Log.e(TAG, "Cannot schedule reminder: currentSelectedTimeSlot, currentUser, or newBookingDocumentId is null after booking confirmation.");
                             }
-                            // --- END ALARM SCHEDULING ---
+                            
 
-                            showProgress(false, false); // Hide progress before navigating
+                            showProgress(false, false); 
                             Intent intent = new Intent(SelectSlotActivity.this, TuteeBookingsActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
@@ -542,7 +533,7 @@ public class SelectSlotActivity extends AppCompatActivity {
         if (timeSlotAdapter != null) {
             timeSlotAdapter.clearSelection();
         }
-        currentSelectedTimeSlot = null; // Clear the selected slot
+        currentSelectedTimeSlot = null; 
     }
 
     private void showProgress(boolean show, boolean forSlotLoading) {
@@ -589,9 +580,7 @@ public class SelectSlotActivity extends AppCompatActivity {
         } else {
             Log.d(TAG, "Resetting UI state without specific error dialog (e.g., payment cancelled).");
         }
-        // Consider if resetUiAfterPaymentInteraction() is always needed here or if it's too aggressive
-        // For instance, if booking confirmation fails, user might not want slots reloaded immediately.
-        // However, if a slot was consumed, reloading is good.
+        
         resetUiAfterPaymentInteraction();
     }
 
@@ -635,28 +624,24 @@ public class SelectSlotActivity extends AppCompatActivity {
                 Log.i(TAG, "SCHEDULE_EXACT_ALARM permission not granted by user. Requesting...");
                 Toast.makeText(this, "Please grant 'Alarms & Reminders' permission for session notifications.", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
-                // For API 33+, you can also direct to your app's specific page for this permission
-                // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                //     intent.setData(Uri.parse("package:" + getPackageName()));
-                // }
+                
                 try {
-                    // It's better to handle the result in onActivityResult and schedule there
+                    
                     startActivityForResult(intent, REQUEST_CODE_SCHEDULE_EXACT_ALARM);
                 } catch (Exception e) {
                     Log.e(TAG, "Could not open exact alarm settings activity", e);
                     Toast.makeText(this, "Could not open Alarms & Reminders settings. Please grant manually for session reminders to work.", Toast.LENGTH_LONG).show();
-                    // Fallback: try scheduling anyway, AlarmScheduler has its own log if it fails.
-                    // This is not ideal UX as the user wasn't properly guided if settings failed to open.
+                    
                     AlarmScheduler.scheduleSessionReminder(SelectSlotActivity.this, bookingToScheduleAfterPermission);
-                    bookingToScheduleAfterPermission = null; // Clear if we attempted scheduling
+                    bookingToScheduleAfterPermission = null; 
                 }
-                return; // Wait for onActivityResult if settings activity was launched
+                return; 
             }
         }
-        // Either permission is granted, or OS version is < Android S (API 31)
+       
         Log.d(TAG, "Permission to schedule exact alarms is OK or not required. Scheduling reminder for booking: " + booking.getDocumentId());
         AlarmScheduler.scheduleSessionReminder(SelectSlotActivity.this, booking);
-        bookingToScheduleAfterPermission = null; // Clear after successful scheduling attempt
+        bookingToScheduleAfterPermission = null; 
     }
 
     // --- HANDLE PERMISSION RESULT from Settings screen ---

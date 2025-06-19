@@ -5,26 +5,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Menu;         // <-- ADD THIS IMPORT
-import android.view.MenuInflater; // <-- ADD THIS IMPORT
-import android.view.MenuItem;    // <-- ADD THIS IMPORT
+import android.view.Menu;        
+import android.view.MenuInflater; 
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-// Removed: androidx.appcompat.app.ActionBarDrawerToggle; (if not used for a drawer)
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-// Removed: androidx.core.view.GravityCompat; (if not used for a drawer)
-// Removed: androidx.drawerlayout.widget.DrawerLayout; (if not used for a drawer)
+
+
 
 import com.example.peer2peer.ChatListActivity;
-import com.example.peer2peer.ChatbotActivity; // <-- ADD THIS IMPORT
+import com.example.peer2peer.ChatbotActivity; 
 import com.google.android.material.button.MaterialButton;
-// Removed: com.google.android.material.navigation.NavigationView; (if not used for a drawer)
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -42,7 +41,7 @@ public class TutorDashboardActivity extends AppCompatActivity {
     private MaterialButton buttonManageResources;
     private MaterialButton buttonTutorMyChats;
     private Button buttonLogout;
-    // No need for private MaterialButton buttonTutorHelpChatbot; if using menu
+   
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -53,8 +52,8 @@ public class TutorDashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // --- AUTH CHECK - Placed early ---
-        mAuth = FirebaseAuth.getInstance(); // Initialize mAuth before using it
+        
+        mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
             Log.w(TAG, "User not authenticated in onCreate(). Redirecting to LoginActivity.");
@@ -62,16 +61,16 @@ public class TutorDashboardActivity extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
-            return; // Important to prevent rest of onCreate from running
+            return; 
         }
-        // --- END AUTH CHECK ---
+        
 
         setContentView(R.layout.activity_tutor_dashboard);
 
         toolbar = findViewById(R.id.toolbar_tutor_dashboard);
         setSupportActionBar(toolbar);
 
-        db = FirebaseFirestore.getInstance(); // db was initialized after auth check, which is fine
+        db = FirebaseFirestore.getInstance(); 
 
         textTutorDashboardTitle = findViewById(R.id.text_tutor_dashboard_title);
         textTutorDashboardMessage = findViewById(R.id.text_tutor_dashboard_message);
@@ -88,20 +87,20 @@ public class TutorDashboardActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // Second Auth Check (good practice)
+      
         if (mAuth.getCurrentUser() == null) {
             Log.w(TAG, "User not authenticated in onStart(). Redirecting to LoginActivity.");
             Intent intent = new Intent(TutorDashboardActivity.this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
-            // No return needed here for onStart if finish() is called.
+           
         }
     }
 
 
     private void fetchTutorDetails() {
-        // ... (your existing fetchTutorDetails method - no changes needed here for the menu)
+       
         if (currentUser != null) {
             db.collection("users").document(currentUser.getUid()).get()
                     .addOnSuccessListener(documentSnapshot -> {
@@ -143,7 +142,7 @@ public class TutorDashboardActivity extends AppCompatActivity {
     }
 
     private void setupButtonClickListeners() {
-        // ... (existing button listeners for manage availability, schedule, resources, my chats)
+       
         if (buttonManageAvailability != null) {
             buttonManageAvailability.setOnClickListener(v ->
                     startActivity(new Intent(TutorDashboardActivity.this, ManageAvailabilityActivity.class))
@@ -184,7 +183,7 @@ public class TutorDashboardActivity extends AppCompatActivity {
                     mAuth.signOut();
                     Toast.makeText(TutorDashboardActivity.this, "Logged out successfully", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(TutorDashboardActivity.this, LoginActivity.class);
-                    // LoginActivity now handles being started without a role extra
+                   
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
@@ -193,30 +192,25 @@ public class TutorDashboardActivity extends AppCompatActivity {
                 .show();
     }
 
-    // --- ADDED FOR TOOLBAR MENU ---
+ 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.tutor_dashboard_menu, menu); // Use the new menu file
+        inflater.inflate(R.menu.tutor_dashboard_menu, menu); 
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
-        if (itemId == R.id.action_tutor_open_chatbot) { // Use the ID from tutor_dashboard_menu.xml
+        if (itemId == R.id.action_tutor_open_chatbot) { l
             Log.d(TAG, "Tutor Chatbot menu item selected. Launching ChatbotActivity.");
             Intent intent = new Intent(TutorDashboardActivity.this, ChatbotActivity.class);
             startActivity(intent);
             return true;
         }
-        // Handle other menu items if you add them, e.g., a profile item
-        // else if (itemId == R.id.action_tutor_view_profile) {
-        //     startActivity(new Intent(this, TutorProfileWizardActivity.class)); // Or a dedicated view/edit profile screen
-        //     return true;
-        // }
+        
         return super.onOptionsItemSelected(item);
     }
-    // --- END ADDED FOR TOOLBAR MENU ---
-
+    
 }

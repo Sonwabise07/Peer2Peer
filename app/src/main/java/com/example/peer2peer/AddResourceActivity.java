@@ -38,7 +38,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-// Import com.google.firebase.Timestamp if your Resource model uses it
+
 import com.google.firebase.Timestamp;
 
 
@@ -52,7 +52,7 @@ public class AddResourceActivity extends AppCompatActivity implements MyResource
 
     private static final String TAG = "AddResourceActivity";
 
-    // Existing UI Elements for Adding Resource
+    
     private Toolbar toolbar;
     private TextInputEditText editTextResourceTitle, editTextResourceDescription, editTextResourceLinkUrl;
     private Spinner spinnerResourceModuleCode;
@@ -63,7 +63,7 @@ public class AddResourceActivity extends AppCompatActivity implements MyResource
     private TextView textViewSelectedFileName;
     private ProgressBar progressBarSaveResource;
 
-    // Firebase
+    
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private FirebaseStorage storage; // Instance of FirebaseStorage
@@ -80,7 +80,7 @@ public class AddResourceActivity extends AppCompatActivity implements MyResource
 
     private ActivityResultLauncher<Intent> filePickerLauncher;
 
-    // --- NEW UI Elements for Displaying Resources ---
+   
     private RecyclerView recyclerViewMyResources;
     private TextView textViewNoResources;
     private MyResourcesAdapter myResourcesAdapter;
@@ -102,7 +102,7 @@ public class AddResourceActivity extends AppCompatActivity implements MyResource
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-        storage = FirebaseStorage.getInstance(); // Correct initialization
+        storage = FirebaseStorage.getInstance(); 
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
@@ -238,7 +238,7 @@ public class AddResourceActivity extends AppCompatActivity implements MyResource
         }
         if (TextUtils.isEmpty(moduleCode)) {
             Toast.makeText(this, "Please select a module", Toast.LENGTH_SHORT).show();
-            if(spinnerResourceModuleCode.getSelectedView() != null) { // Check if selected view is not null
+            if(spinnerResourceModuleCode.getSelectedView() != null) { 
                 ((TextView)spinnerResourceModuleCode.getSelectedView()).setError("Module is required");
             }
             return;
@@ -269,7 +269,7 @@ public class AddResourceActivity extends AppCompatActivity implements MyResource
         showProgress(true);
 
         String uniqueFileNameInStorage = UUID.randomUUID().toString() + "_" + (originalFileName != null ? originalFileName.replaceAll("[^a-zA-Z0-9._-]", "_") : "file");
-        StorageReference storageRef = storage.getReference() // storage is FirebaseStorage.getInstance()
+        StorageReference storageRef = storage.getReference() 
                 .child("tutor_resources")
                 .child(currentTutorUid)
                 .child(moduleCode)
@@ -289,7 +289,7 @@ public class AddResourceActivity extends AppCompatActivity implements MyResource
             if (task.isSuccessful()) {
                 Uri downloadUri = task.getResult();
                 if (downloadUri != null) {
-                    // Pass originalFileName as 'fileName' and storageRef.getPath() as 'filePath'
+                    '
                     saveResourceToFirestore(title, description, moduleCode, "file",
                             downloadUri.toString(), originalFileName, storageRef.getPath(), mimeTypeParam);
                 } else {
@@ -386,15 +386,15 @@ public class AddResourceActivity extends AppCompatActivity implements MyResource
                             resource.setDocumentId(document.getId());
                             myResourceList.add(resource);
                         }
-                        // It's good practice to pass a new list or ensure the adapter handles internal copying if needed
+                        
                         myResourcesAdapter.submitList(new ArrayList<>(myResourceList));
                         updateNoResourcesView();
                         Log.d(TAG, "Loaded " + myResourceList.size() + " resources.");
                     } else {
                         Log.e(TAG, "Error loading resources: ", task.getException());
                         Toast.makeText(AddResourceActivity.this, "Failed to load resources.", Toast.LENGTH_SHORT).show();
-                        myResourceList.clear(); // Ensure list is clear on error
-                        myResourcesAdapter.submitList(new ArrayList<>(myResourceList)); // Update adapter with empty list
+                        myResourceList.clear(); 
+                        myResourcesAdapter.submitList(new ArrayList<>(myResourceList)); 
                         updateNoResourcesView();
                     }
                 });
@@ -436,8 +436,8 @@ public class AddResourceActivity extends AppCompatActivity implements MyResource
                     Log.d(TAG, "Resource document successfully deleted from Firestore: " + docId);
                     // Use getFilePath() from your Resource.java
                     if ("file".equalsIgnoreCase(resource.getType()) && resource.getFilePath() != null && !resource.getFilePath().isEmpty()) {
-                        // storage is FirebaseStorage.getInstance()
-                        // This is the standard way to get a StorageReference from a full path
+                        
+                        
                         StorageReference fileRef = storage.getReference(resource.getFilePath());
                         fileRef.delete().addOnSuccessListener(aVoid1 -> {
                             Log.d(TAG, "Resource file successfully deleted from Storage: " + resource.getFilePath());

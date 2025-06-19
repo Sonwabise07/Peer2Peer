@@ -16,9 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.peer2peer.adapters.AdminTutorListAdapter;
-import com.example.peer2peer.Tutor; // Assuming Tutor model is used for general user/tutor data
+import com.example.peer2peer.Tutor;
 
-import com.google.firebase.auth.FirebaseAuth; // Not strictly needed here unless you check admin auth state again
+import com.google.firebase.auth.FirebaseAuth; 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -29,7 +29,7 @@ import java.util.List;
 
 public class AdminVerifyTutorsActivity extends AppCompatActivity {
 
-    private static final String TAG = "AdminVerifyActivity"; // Consistent TAG
+    private static final String TAG = "AdminVerifyActivity"; 
 
     // UI Elements
     private Toolbar toolbar;
@@ -62,10 +62,7 @@ public class AdminVerifyTutorsActivity extends AppCompatActivity {
             finish();
             return;
         }
-        // You might also want to re-check the isAdmin claim here if this activity is sensitive,
-        // though typically AdminDashboardActivity would have done that.
-        // --- END AUTH CHECK ---
-
+        
 
         // Find Views
         toolbar = findViewById(R.id.toolbar_verify_tutors);
@@ -104,14 +101,14 @@ public class AdminVerifyTutorsActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // Re-check auth state in onStart as well
+       
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             Log.w(TAG, "Admin not authenticated in onStart(). Redirecting to AdminLoginActivity.");
             Intent intent = new Intent(this, AdminLoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
-            // No return needed here for onStart if finish() is called.
+        
         }
     }
 
@@ -132,11 +129,11 @@ public class AdminVerifyTutorsActivity extends AppCompatActivity {
         Log.d(TAG, "Fetching tutors with role 'Tutor' and profileStatus 'pending_verification'");
         db.collection("users")
                 .whereEqualTo("role", "Tutor")
-                .whereEqualTo("profileStatus", "pending_verification") // <-- CORRECTED STATUS
+                .whereEqualTo("profileStatus", "pending_verification") 
                 .get()
                 .addOnCompleteListener(task -> {
                     showLoading(false);
-                    pendingTutorList.clear(); // Clear before adding new results
+                    pendingTutorList.clear(); 
 
                     if (task.isSuccessful()) {
                         QuerySnapshot snapshots = task.getResult();
@@ -144,19 +141,19 @@ public class AdminVerifyTutorsActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot doc : snapshots) {
                                 try {
                                     Tutor tutor = doc.toObject(Tutor.class);
-                                    // Ensure your Tutor model can handle all fields or has @IgnoreExtraProperties
+                                    
                                     if (tutor != null) {
-                                        tutor.setUid(doc.getId()); // Make sure Tutor model has setUid
+                                        tutor.setUid(doc.getId()); 
                                         pendingTutorList.add(tutor);
                                         Log.d(TAG, "Fetched pending tutor: " + tutor.getUid() +
-                                                " Name: " + tutor.getFirstName() + // Example field
+                                                " Name: " + tutor.getFirstName() + 
                                                 " Status: " + doc.getString("profileStatus"));
                                     } else {
                                         Log.w(TAG, "Pending tutor data was null after toObject() for doc: " + doc.getId() + ". Check Tutor.java model and Firestore data.");
                                     }
                                 } catch (Exception e) {
                                     Log.e(TAG, "Error parsing pending tutor document ID: " + doc.getId(), e);
-                                    // Consider how to handle individual parsing errors - skip item or show error?
+                                    
                                 }
                             }
                             Log.d(TAG, "Total pending tutors fetched: " + pendingTutorList.size());
@@ -168,7 +165,7 @@ public class AdminVerifyTutorsActivity extends AppCompatActivity {
                         Toast.makeText(AdminVerifyTutorsActivity.this, "Error loading pending tutors.", Toast.LENGTH_SHORT).show();
                     }
 
-                    // Update UI based on final list content
+                    
                     if (pendingTutorList.isEmpty()) {
                         textViewEmpty.setText("No tutors currently pending verification.");
                         textViewEmpty.setVisibility(View.VISIBLE);
@@ -177,7 +174,7 @@ public class AdminVerifyTutorsActivity extends AppCompatActivity {
                         textViewEmpty.setVisibility(View.GONE);
                         recyclerView.setVisibility(View.VISIBLE);
                     }
-                    adapter.notifyDataSetChanged(); // Notify adapter with the updated pendingTutorList
+                    adapter.notifyDataSetChanged(); 
                 });
     }
 
@@ -185,7 +182,7 @@ public class AdminVerifyTutorsActivity extends AppCompatActivity {
         if (progressBar != null) {
             progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
         }
-        // Only hide RecyclerView when loading starts
+       
         if (isLoading) {
             if (recyclerView != null) {
                 recyclerView.setVisibility(View.GONE);
@@ -194,14 +191,8 @@ public class AdminVerifyTutorsActivity extends AppCompatActivity {
                 textViewEmpty.setVisibility(View.GONE);
             }
         }
-        // Visibility of RecyclerView and textViewEmpty will be set after data fetch in fetchPendingTutors
+        
     }
 
-    // Consider adding onResume to refresh the list if the admin might navigate away and back
-    // while a tutor's status could change.
-    // @Override
-    // protected void onResume() {
-    //     super.onResume();
-    //     fetchPendingTutors(); // This will refresh the list every time the activity is resumed
-    // }
+   
 }

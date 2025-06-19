@@ -1,10 +1,10 @@
-package com.example.peer2peer; // Ensure this matches your package
+package com.example.peer2peer; 
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
-import android.view.View; // Import View
+import android.view.View; 
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,18 +30,18 @@ public class AccountBlockedActivity extends AppCompatActivity {
         }
 
         buttonReturnToLogin.setOnClickListener(v -> {
-            // Clear task and start LoginActivity fresh
+            
             Intent intent = new Intent(AccountBlockedActivity.this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
-            finish(); // Finish this activity
+            finish(); 
         });
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        // Ensure pressing back also leads to a clean login state
+       
         Intent intent = new Intent(AccountBlockedActivity.this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

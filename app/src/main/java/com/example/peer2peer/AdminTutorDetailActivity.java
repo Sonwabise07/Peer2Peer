@@ -1,7 +1,6 @@
 package com.example.peer2peer;
 
-// ... (Keep all existing imports)
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
@@ -29,7 +28,7 @@ import com.google.firebase.functions.FirebaseFunctions;
 import com.google.firebase.functions.FirebaseFunctionsException;
 
 import java.util.HashMap;
-import java.util.List; // Keep if tutor.getModulesToTutor() etc. are used
+import java.util.List; 
 import java.util.Locale;
 import java.util.Map;
 
@@ -48,7 +47,7 @@ public class AdminTutorDetailActivity extends AppCompatActivity {
 
     // Firebase
     private FirebaseFirestore db;
-    private FirebaseAuth mAuth; // Not directly used in methods shown, but good to keep if needed elsewhere
+    private FirebaseAuth mAuth;
     private FirebaseFunctions mFunctions;
 
     // Data
@@ -189,15 +188,15 @@ public class AdminTutorDetailActivity extends AppCompatActivity {
         textQualification.setText("Qualification: " + (tutor.getQualifications() != null ? tutor.getQualifications() : "N/A"));
         textYear.setText("Year of Study: " + (tutor.getYearOfStudy() != null ? tutor.getYearOfStudy() : "N/A"));
 
-        // --- CORRECTED: Use standard getter names for document URLs ---
+        
         setupDocumentView(textDocId, tutor.getIdDocumentUrl(), "ID Document");
         setupDocumentView(textDocAcademic, tutor.getAcademicRecordUrl(), "Academic Record");
         setupDocumentView(textDocProofReg, tutor.getProofRegistrationUrl(), "Proof of Reg");
     }
 
     private void setupDocumentView(TextView textView, String url, String docName) {
-        int linkColor = ContextCompat.getColor(this, R.color.purple_700); // Ensure R.color.purple_700 exists
-        int defaultColor = ContextCompat.getColor(this, R.color.grey_500); // Ensure R.color.grey_500 exists (or use android.R.color.darker_gray)
+        int linkColor = ContextCompat.getColor(this, R.color.purple_700); 
+        int defaultColor = ContextCompat.getColor(this, R.color.grey_500); 
 
         if (url != null && !url.isEmpty()) {
             textView.setText(docName + ": Uploaded (Tap to View)");
@@ -205,15 +204,14 @@ public class AdminTutorDetailActivity extends AppCompatActivity {
             textView.setOnClickListener(v -> viewDocument(url, docName));
             textView.setClickable(true);
             textView.setFocusable(true);
-            // If you want a specific background for clickable text:
-            // textView.setBackgroundResource(R.drawable.clickable_text_background); // Example
+           
         } else {
             textView.setText(docName + ": Not Uploaded");
             textView.setTextColor(defaultColor);
             textView.setOnClickListener(null);
             textView.setClickable(false);
             textView.setFocusable(false);
-            textView.setBackground(null); // Remove any specific background
+            textView.setBackground(null); 
         }
     }
 
@@ -254,23 +252,20 @@ public class AdminTutorDetailActivity extends AppCompatActivity {
 
         Map<String, Object> data = new HashMap<>();
         data.put("tutorId", tutorUid);
-        // If you add rejection reason input, pass it here for "rejectTutor" function:
-        // if (functionName.equals("rejectTutor") && rejectionReasonString != null) {
-        //    data.put("reason", rejectionReasonString);
-        // }
+       
 
         mFunctions.getHttpsCallable(functionName)
                 .call(data)
                 .addOnCompleteListener(task -> {
-                    showLoading(false); // Hide progress bar when task completes
+                    showLoading(false); 
 
                     if (task.isSuccessful()) {
                         Log.i(TAG, functionName + " function successful for UID: " + tutorUid);
                         Toast.makeText(AdminTutorDetailActivity.this, successMessage, Toast.LENGTH_LONG).show();
-                        setResult(RESULT_OK); // Indicate success to AdminVerifyTutorsActivity
+                        setResult(RESULT_OK); 
                         finish();
                     } else {
-                        // Re-enable buttons only if currentTutor is loaded and status is still pending
+                        
                         if (currentTutor != null && "pending_verification".equals(currentTutor.getProfileStatus())) {
                             buttonApprove.setEnabled(true);
                             buttonReject.setEnabled(true);
@@ -311,6 +306,6 @@ public class AdminTutorDetailActivity extends AppCompatActivity {
             if (buttonApprove != null) buttonApprove.setEnabled(false);
             if (buttonReject != null) buttonReject.setEnabled(false);
         }
-        // Details layout visibility is handled in fetchTutorDetails on success
+        
     }
 }

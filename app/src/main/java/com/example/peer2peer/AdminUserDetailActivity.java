@@ -7,19 +7,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-// import android.widget.ImageView; // Commented out as it's not in your XML yet
+
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull; // Ensure this import for @NonNull
+import androidx.annotation.NonNull; 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
-// import com.bumptech.glide.Glide; // Commented out as ImageView is not used yet
+
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,13 +40,11 @@ public class AdminUserDetailActivity extends AppCompatActivity {
     // UI Elements
     private Toolbar toolbar;
     private TextView textViewName, textViewEmail, textViewRole, textViewAdminUserStatus, textViewError;
-    // textViewAdminUserStatus will be used for "Active/Blocked" and profile status
+   
     private Button buttonBlockUser, buttonUnblockUser;
     private ProgressBar progressBar;
     private ConstraintLayout contentLayout;
-    // private ImageView imageViewProfile; // Commented out - Add to XML first if needed
-
-    // Firebase
+    
     private FirebaseFirestore db;
     private FirebaseFunctions mFunctions;
 
@@ -66,13 +64,13 @@ public class AdminUserDetailActivity extends AppCompatActivity {
         textViewName = findViewById(R.id.textViewAdminUserName);
         textViewEmail = findViewById(R.id.textViewAdminUserEmail);
         textViewRole = findViewById(R.id.textViewAdminUserRole);
-        textViewAdminUserStatus = findViewById(R.id.textViewAdminUserStatus); // This ID is in your XML
+        textViewAdminUserStatus = findViewById(R.id.textViewAdminUserStatus); 
         textViewError = findViewById(R.id.textViewAdminUserDetailError);
-        buttonBlockUser = findViewById(R.id.buttonBlockUser); // Matches your XML ID
-        buttonUnblockUser = findViewById(R.id.buttonUnblockUser); // Matches your XML ID
+        buttonBlockUser = findViewById(R.id.buttonBlockUser); 
+        buttonUnblockUser = findViewById(R.id.buttonUnblockUser); 
         progressBar = findViewById(R.id.progressBarAdminUserDetail);
         contentLayout = findViewById(R.id.layoutAdminUserDetailsContent);
-        // imageViewProfile = findViewById(R.id.imageViewAdminUserProfile); // Commented out
+        
 
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -137,7 +135,7 @@ public class AdminUserDetailActivity extends AppCompatActivity {
                 .addOnSuccessListener(documentSnapshot -> {
                     showLoading(false);
                     if (documentSnapshot.exists()) {
-                        currentUserData = documentSnapshot.toObject(Tutor.class); // Assuming Tutor model has isBlocked
+                        currentUserData = documentSnapshot.toObject(Tutor.class); 
                         if (currentUserData != null) {
                             currentUserData.setUid(documentSnapshot.getId());
                             Log.d(TAG, "User data fetched successfully: " + currentUserData.getFullName() + ", isBlocked: " + currentUserData.isBlocked());
@@ -169,18 +167,13 @@ public class AdminUserDetailActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(currentUserData.getFullName());
         }
 
-        // Commented out ImageView logic - add an ImageView to your XML with ID imageViewAdminUserProfile if you want to use it
-        // if (imageViewProfile != null && currentUserData.getProfileImageUrl() != null && !currentUserData.getProfileImageUrl().isEmpty()) {
-        //     Glide.with(this).load(currentUserData.getProfileImageUrl()).placeholder(R.drawable.ic_person_placeholder_default).into(imageViewProfile);
-        // } else if (imageViewProfile != null) {
-        //     imageViewProfile.setImageResource(R.drawable.ic_person_placeholder_default);
-        // }
+        
 
         if (textViewName != null) textViewName.setText(currentUserData.getFullName() != null ? currentUserData.getFullName() : "N/A");
         if (textViewEmail != null) textViewEmail.setText(currentUserData.getEmail() != null ? currentUserData.getEmail() : "N/A");
         if (textViewRole != null) textViewRole.setText(currentUserData.getRole() != null ? capitalize(currentUserData.getRole()) : "N/A");
 
-        updateAccountStatusAndButtons(); // This will handle isBlocked text and button states
+        updateAccountStatusAndButtons(); 
     }
 
     private void updateAccountStatusAndButtons() {
@@ -244,15 +237,10 @@ public class AdminUserDetailActivity extends AppCompatActivity {
         showLoading(true);
         if (buttonBlockUser != null) buttonBlockUser.setEnabled(false);
         if (buttonUnblockUser != null) buttonUnblockUser.setEnabled(false);
-        // Toast.makeText(this, progressMessage, Toast.LENGTH_SHORT).show(); // Snackbar is better
-
+        
         Map<String, Object> data = new HashMap<>();
         data.put("userId", userUid);
-        // Note: Your current 'blockUser' CF does not use a reason.
-        // If you update it, you would add:
-        // if (reason != null && !reason.isEmpty() && functionName.equals("blockUser")) {
-        //    data.put("reason", reason);
-        // }
+        
 
         Log.d(TAG, "Calling cloud function: " + functionName + " for user: " + userUid);
 
@@ -278,7 +266,7 @@ public class AdminUserDetailActivity extends AppCompatActivity {
                         boolean wasBlockingOperation = functionName.equals("blockUser");
                         if (currentUserData != null) {
                             currentUserData.setBlocked(wasBlockingOperation);
-                            populateUI(); // This re-populates text fields and updates button states
+                            populateUI();
                             if (contentLayout != null) contentLayout.setVisibility(View.VISIBLE);
                         } else {
                             fetchUserData();
@@ -296,8 +284,7 @@ public class AdminUserDetailActivity extends AppCompatActivity {
                         if(contentLayout != null) Snackbar.make(contentLayout, "Error: " + errorMessage, Snackbar.LENGTH_LONG).show();
                         else Toast.makeText(this, "Error: " + errorMessage, Toast.LENGTH_LONG).show();
 
-                        if (contentLayout != null) contentLayout.setVisibility(View.VISIBLE); // Still show content on error
-                        updateAccountStatusAndButtons(); // Re-enable buttons based on last known state
+                        if (contentLayout != null) contentLayout.setVisibility(View.VISIBLE);
                     }
                 });
     }

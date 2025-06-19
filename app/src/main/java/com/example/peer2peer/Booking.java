@@ -1,20 +1,20 @@
-// In app/src/main/java/com/example/peer2peer/Booking.java
+
 package com.example.peer2peer;
 
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentId;
 import com.google.firebase.firestore.ServerTimestamp;
 
-import java.util.Date; // For toString()
-import java.text.SimpleDateFormat; // For toString()
-import java.util.Locale; // For toString()
+import java.util.Date; 
+import java.text.SimpleDateFormat; 
+import java.util.Locale; 
 
 public class Booking {
 
     @DocumentId
-    private String documentId; // Stays private with @DocumentId for auto-population
+    private String documentId; 
 
-    // Keep other existing fields as private with their getters/setters
+   
     private String tutorUid;
     private String tuteeUid;
     private String availabilitySlotId;
@@ -31,18 +31,17 @@ public class Booking {
     private String paymentIntentId;
     private String currency;
 
-    // --- FIELD FROM YOUR "NEW" VERSION ---
-    // Make 'isRated' public and match the Firestore field name "isRated"
-    public boolean isRated = false; // Default to false
+   
+    public boolean isRated = false; 
 
-    // No-argument constructor required for Firestore
+    
     public Booking() {}
 
-    // Full constructor (optional, but ensure it's consistent if you use it)
+   
     public Booking(String documentId, String tutorUid, String tuteeUid, String availabilitySlotId,
                    Timestamp startTime, Timestamp endTime, String bookingStatus, String moduleCode,
                    Timestamp createdAt, String tutorName, String tuteeName, String meetingLink,
-                   boolean isRated, // Matches the public field
+                   boolean isRated, 
                    Double rateCharged, String paymentIntentId, String currency) {
         this.documentId = documentId;
         this.tutorUid = tutorUid;
@@ -56,13 +55,13 @@ public class Booking {
         this.tutorName = tutorName;
         this.tuteeName = tuteeName;
         this.meetingLink = meetingLink;
-        this.isRated = isRated; // Assign to the public field
+        this.isRated = isRated; 
         this.rateCharged = rateCharged;
         this.paymentIntentId = paymentIntentId;
         this.currency = currency;
     }
 
-    // --- Standard Getters & Setters for other private fields ---
+    
     public String getDocumentId() { return documentId; }
     public void setDocumentId(String documentId) { this.documentId = documentId; }
 
@@ -125,7 +124,7 @@ public class Booking {
                 ", startTime=" + startTimeStr +
                 ", endTime=" + endTimeStr +
                 ", bookingStatus='" + bookingStatus + '\'' +
-                ", isRated=" + isRated + // Direct access as it's public in your new version
+                ", isRated=" + isRated + 
                 ", meetingLink='" + meetingLink + '\'' +
                 ", rateCharged=" + rateCharged +
                 ", paymentIntentId='" + paymentIntentId + '\'' +

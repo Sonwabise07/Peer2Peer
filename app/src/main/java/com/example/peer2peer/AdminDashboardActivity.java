@@ -1,18 +1,17 @@
 package com.example.peer2peer;
 
-// ... (keep all your existing imports)
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button; // Keep if you use standard Buttons elsewhere, or remove if all are MaterialButtons
+import android.widget.Button; 
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.material.button.MaterialButton; // Import MaterialButton
+import com.google.android.material.button.MaterialButton; 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.functions.FirebaseFunctions;
@@ -24,19 +23,19 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
     private static final String TAG = "AdminDashboard";
 
-    // UI Elements for Stats (ensure these match your XML and previous Java code)
+    
     private TextView textViewTotalRegisteredTutors, textViewTotalVerifiedTutors, textViewTotalPendingTutors, textViewTotalRejectedTutors;
     private TextView textViewTotalTutees, textViewTotalActiveUsers, textViewOverallTotalBookings, textViewTotalConfirmedBookings;
     private ProgressBar progressBarStats;
     private TextView textViewStatsError;
 
 
-    // Other UI Elements
+  
     private Toolbar toolbar;
-    private MaterialButton verifyTutorsButton; // Changed to MaterialButton
-    private MaterialButton manageUsersButton;  // Changed to MaterialButton
-    private MaterialButton buttonViewReports;  // **** NEW BUTTON ****
-    private MaterialButton buttonAdminLogout;  // Changed to MaterialButton
+    private MaterialButton verifyTutorsButton; 
+    private MaterialButton manageUsersButton;  
+    private MaterialButton buttonViewReports;  
+    private MaterialButton buttonAdminLogout;  
 
 
     private FirebaseFunctions mFunctions;
@@ -55,9 +54,9 @@ public class AdminDashboardActivity extends AppCompatActivity {
         verifyTutorsButton = findViewById(R.id.button_verify_tutors);
         manageUsersButton = findViewById(R.id.button_manage_users);
         buttonAdminLogout = findViewById(R.id.button_admin_logout);
-        buttonViewReports = findViewById(R.id.buttonViewReports); // **** INITIALIZE NEW BUTTON ****
+        buttonViewReports = findViewById(R.id.buttonViewReports);
 
-        // Initialize Stats TextViews (as you had them)
+      
         textViewTotalRegisteredTutors = findViewById(R.id.textViewTotalTutors);
         textViewTotalTutees = findViewById(R.id.textViewTotalTutees);
         textViewTotalConfirmedBookings = findViewById(R.id.textViewTotalBookings);
@@ -109,15 +108,14 @@ public class AdminDashboardActivity extends AppCompatActivity {
         loadDashboardStats();
     }
 
-    // ... (keep your loadDashboardStats, setStatsLoading, showStatsError, performLogout methods exactly as they were in your last working version) ...
-    // Make sure they correctly reference the TextView IDs for stats
+    
     private void setStatsLoading(boolean isLoading) {
         if (progressBarStats != null) progressBarStats.setVisibility(isLoading ? View.VISIBLE : View.GONE);
         if (textViewStatsError != null) textViewStatsError.setVisibility(View.GONE);
         String loadingText = isLoading ? "..." : "--";
         if (textViewTotalRegisteredTutors != null) textViewTotalRegisteredTutors.setText(loadingText);
         if (textViewTotalVerifiedTutors != null) textViewTotalVerifiedTutors.setText(loadingText);
-        if (textViewTotalPendingTutors != null) textViewTotalPendingTutors.setText(loadingText); // Or "Pending: ..."
+        if (textViewTotalPendingTutors != null) textViewTotalPendingTutors.setText(loadingText); 
         if (textViewTotalRejectedTutors != null) textViewTotalRejectedTutors.setText(loadingText);
         if (textViewTotalTutees != null) textViewTotalTutees.setText(loadingText);
         if (textViewTotalActiveUsers != null) textViewTotalActiveUsers.setText(loadingText);
@@ -201,7 +199,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         if (mAuth != null) { mAuth.signOut(); }
         Toast.makeText(this, "Admin Logged out", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "Admin signed out.");
-        Intent intent = new Intent(AdminDashboardActivity.this, LoginActivity.class); // Changed to LoginActivity for admin logout
+        Intent intent = new Intent(AdminDashboardActivity.this, LoginActivity.class); 
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();

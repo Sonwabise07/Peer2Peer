@@ -69,9 +69,7 @@ public class ChatListActivity extends AppCompatActivity implements ChatListAdapt
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
             Toast.makeText(this, "You need to be logged in to view chats.", Toast.LENGTH_LONG).show();
-            // Optionally, redirect to LoginActivity
-            // Intent intent = new Intent(ChatListActivity.this, LoginActivity.class);
-            // startActivity(intent);
+            
             finish();
             return;
         }
@@ -125,12 +123,12 @@ public class ChatListActivity extends AppCompatActivity implements ChatListAdapt
                 Map<String, String> participantNames = (Map<String, String>) doc.get("participantNames");
                 String lastMessageText = doc.getString("lastMessageText");
                 Date lastMessageTimestamp = doc.getDate("lastMessageTimestamp");
-                // String lastMessageSenderId = doc.getString("lastMessageSenderId"); // If needed
+               
 
                 if (participantIds != null && participantIds.size() == 2 && participantNames != null) {
                     String otherParticipantId = null;
                     String otherParticipantName = "Unknown User";
-                    // String otherParticipantProfileImageUrl = null; // Placeholder for profile image URL
+                   
 
                     for (String id : participantIds) {
                         if (!id.equals(currentUserId)) {
@@ -141,25 +139,22 @@ public class ChatListActivity extends AppCompatActivity implements ChatListAdapt
 
                     if (otherParticipantId != null && participantNames.containsKey(otherParticipantId)) {
                         otherParticipantName = participantNames.get(otherParticipantId);
-                        // You would also fetch/get the profile image URL for otherParticipantId if available
-                        // For example, if stored in participantNames or another map like participantProfileImages
+                       
                     } else if (otherParticipantId != null) {
                         Log.w(TAG, "Name not found in participantNames map for ID: " + otherParticipantId + " in chatRoom: " + chatRoomId);
-                        // You might need a fallback to fetch user details from "users" collection if name isn't in chat_rooms doc
+                       
                     }
 
 
                     if (otherParticipantId != null) {
-                        // For now, profile image URL is null.
-                        // You'd fetch this if your 'users' collection has profileImageUrls
-                        // and you want to display them.
-                        String profileImageUrl = null; // TODO: Fetch or get from chat_rooms if stored there
+                        
+                        String profileImageUrl = null; 
 
                         ChatRoomSummary summary = new ChatRoomSummary(
                                 chatRoomId,
                                 otherParticipantId,
                                 otherParticipantName,
-                                profileImageUrl, // Pass null or actual URL
+                                profileImageUrl, 
                                 lastMessageText,
                                 lastMessageTimestamp
                         );
@@ -178,7 +173,7 @@ public class ChatListActivity extends AppCompatActivity implements ChatListAdapt
                 textViewNoChats.setVisibility(View.GONE);
                 recyclerViewChatList.setVisibility(View.VISIBLE);
             }
-            chatListAdapter.updateChatRooms(chatRoomSummariesList); // Update adapter with new or modified list
+            chatListAdapter.updateChatRooms(chatRoomSummariesList); 
             Log.d(TAG, "Chat rooms loaded: " + chatRoomSummariesList.size());
         });
     }
@@ -189,14 +184,14 @@ public class ChatListActivity extends AppCompatActivity implements ChatListAdapt
         Intent intent = new Intent(this, ChatActivity.class);
         intent.putExtra(ChatActivity.EXTRA_CHAT_PARTNER_ID, chatRoomSummary.getOtherParticipantId());
         intent.putExtra(ChatActivity.EXTRA_CHAT_PARTNER_NAME, chatRoomSummary.getOtherParticipantName());
-        // You might also want to pass chatRoomSummary.getChatRoomId() if ChatActivity needs it directly
+
         startActivity(intent);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            onBackPressed(); // Or finish();
+            onBackPressed(); 
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -206,7 +201,7 @@ public class ChatListActivity extends AppCompatActivity implements ChatListAdapt
     protected void onDestroy() {
         super.onDestroy();
         if (chatRoomsListener != null) {
-            chatRoomsListener.remove(); // Important: Remove Firestore listener
+            chatRoomsListener.remove(); 
         }
     }
 }

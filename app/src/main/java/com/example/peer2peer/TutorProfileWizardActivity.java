@@ -1,4 +1,4 @@
-package com.example.peer2peer; // Replace with your package name
+package com.example.peer2peer; 
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,26 +14,26 @@ import com.example.peer2peer.fragments.TutorProfileStep4Fragment;
 import com.example.peer2peer.fragments.TutorProfileStep5Fragment;
 import com.example.peer2peer.viewmodels.TutorProfileViewModel;
 
-// --- ADDED/CHECKED Imports ---
-import android.app.ProgressDialog; // For progress indicator
-import android.app.AlertDialog;    // For error messages
+
+import android.app.ProgressDialog; 
+import android.app.AlertDialog;    
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap; // For getting file extensions
+import android.webkit.MimeTypeMap; 
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-// --- End Added Imports ---
+
 
 
 // --- Firebase Imports ---
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FieldValue; // For server timestamp
+import com.google.firebase.firestore.FieldValue; 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
@@ -47,7 +47,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID; // Not used currently, but can keep for future unique naming
+import java.util.UUID; 
 
 public class TutorProfileWizardActivity extends AppCompatActivity {
 
@@ -61,7 +61,7 @@ public class TutorProfileWizardActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private FirebaseStorage storage;
-    private ProgressDialog progressDialog; // Declared member variable
+    private ProgressDialog progressDialog; 
 
     private int currentStep = 1;
     private final int totalSteps = 5;
@@ -76,9 +76,9 @@ public class TutorProfileWizardActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
 
-        // Initialize ProgressDialog
+       
         progressDialog = new ProgressDialog(this);
-        // Ensure strings used here exist in strings.xml
+        
         progressDialog.setMessage(getString(R.string.progress_submitting));
         progressDialog.setCancelable(false);
 
@@ -93,8 +93,7 @@ public class TutorProfileWizardActivity extends AppCompatActivity {
         updateUIControls();
 
         buttonNext.setOnClickListener(v -> {
-            // --- TODO: Add fragment-level validation before proceeding/submitting ---
-            // Example: if (!isCurrentFragmentValid()) { return; }
+            
 
             if (currentStep < totalSteps) {
                 currentStep++;
@@ -115,22 +114,22 @@ public class TutorProfileWizardActivity extends AppCompatActivity {
         });
     }
 
-    // --- Submission Logic ---
+    
     private void submitProfileData() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
-            // Ensure string exists
+            
             Toast.makeText(this, R.string.error_not_logged_in, Toast.LENGTH_SHORT).show();
             return;
         }
         String userId = currentUser.getUid();
 
-        // Basic file presence validation
+        
         if (viewModel.getProfileImageUri().getValue() == null ||
                 viewModel.getIdDocumentUri().getValue() == null ||
                 viewModel.getProofRegistrationUri().getValue() == null ||
                 viewModel.getAcademicRecordUri().getValue() == null) {
-            // Ensure string exists
+           
             Toast.makeText(this, R.string.error_missing_files, Toast.LENGTH_LONG).show();
             return;
         }
@@ -148,7 +147,7 @@ public class TutorProfileWizardActivity extends AppCompatActivity {
         Uri proofDocUri = viewModel.getProofRegistrationUri().getValue();
         Uri recordDocUri = viewModel.getAcademicRecordUri().getValue();
 
-        // Define Storage References
+        
         String profileImageExt = getFileExtension(profileImageUri);
         String idDocExt = getFileExtension(idDocUri);
         String proofDocExt = getFileExtension(proofDocUri);
@@ -159,11 +158,11 @@ public class TutorProfileWizardActivity extends AppCompatActivity {
         StorageReference proofDocRef = storageRef.child("users/" + userId + "/documents/proofRegistration" + (proofDocExt != null ? "." + proofDocExt : ""));
         StorageReference recordDocRef = storageRef.child("users/" + userId + "/documents/academicRecord" + (recordDocExt != null ? "." + recordDocExt : ""));
 
-        // Create upload tasks list
+    
         List<UploadTask> uploadTasks = new ArrayList<>();
-        List<Task<Uri>> downloadUrlTasks = new ArrayList<>(); // List to hold download URL tasks
+        List<Task<Uri>> downloadUrlTasks = new ArrayList<>(); 
 
-        // Add profile image upload task
+       
         UploadTask profileUploadTask = profileImageRef.putFile(profileImageUri);
         uploadTasks.add(profileUploadTask);
         downloadUrlTasks.add(profileUploadTask.continueWithTask(task -> {
@@ -179,7 +178,7 @@ public class TutorProfileWizardActivity extends AppCompatActivity {
             return idDocRef.getDownloadUrl();
         }));
 
-        // Add Proof document upload task
+       
         UploadTask proofUploadTask = proofDocRef.putFile(proofDocUri);
         uploadTasks.add(proofUploadTask);
         downloadUrlTasks.add(proofUploadTask.continueWithTask(task -> {
@@ -187,7 +186,7 @@ public class TutorProfileWizardActivity extends AppCompatActivity {
             return proofDocRef.getDownloadUrl();
         }));
 
-        // Add Record document upload task
+    
         UploadTask recordUploadTask = recordDocRef.putFile(recordDocUri);
         uploadTasks.add(recordUploadTask);
         downloadUrlTasks.add(recordUploadTask.continueWithTask(task -> {
@@ -196,7 +195,7 @@ public class TutorProfileWizardActivity extends AppCompatActivity {
         }));
 
 
-        // Wait for all DOWNLOAD URL tasks to complete
+   
         Task<List<Uri>> allDownloadUrlTasks = Tasks.whenAllSuccess(downloadUrlTasks);
 
         allDownloadUrlTasks.addOnSuccessListener(downloadUris -> {
