@@ -12,13 +12,13 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="100dp"
+        android:contentDescription="@string/app_logo_description"
         android:src="@mipmap/ic_launcher_round"
+        app:layout_constraintBottom_toTopOf="@+id/text_welcome_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/text_welcome_title"
-        app:layout_constraintVertical_chainStyle="packed"
-        android:contentDescription="App Logo" />
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/text_welcome_title"
@@ -29,10 +29,10 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
         android:textColor="@android:color/white"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/text_welcome_tagline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_app_logo_landing"
-        app:layout_constraintBottom_toTopOf="@+id/text_welcome_tagline"/>
+        app:layout_constraintTop_toBottomOf="@+id/image_app_logo_landing" />
 
     <TextView
         android:id="@+id/text_welcome_tagline"
@@ -45,10 +45,10 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/button_get_started_landing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_welcome_title"
-        app:layout_constraintBottom_toTopOf="@+id/button_get_started_landing" />
+        app:layout_constraintTop_toBottomOf="@+id/text_welcome_title" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_get_started_landing"
@@ -65,6 +65,8 @@
         android:textColor="@color/colorPrimaryDark"
         app:backgroundTint="@android:color/white"
         app:cornerRadius="24dp"
+        app:icon="@drawable/ic_arrow_forward"
+        app:iconGravity="textEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

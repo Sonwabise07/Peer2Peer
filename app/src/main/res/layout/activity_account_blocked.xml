@@ -12,17 +12,25 @@
         android:id="@+id/imageViewBlockedIcon"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/ic_admin_block_user" /> <TextView
-    android:id="@+id/textViewBlockedTitle"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="24dp"
-    android:text="Account Suspended"
-    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-    android:textColor="?attr/colorError"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/imageViewBlockedIcon" />
+        android:src="@drawable/ic_admin_block_user"
+        android:contentDescription="@string/account_blocked_icon_description"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintBottom_toTopOf="@+id/textViewBlockedTitle"/>
+
+    <TextView
+        android:id="@+id/textViewBlockedTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Account Suspended"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        android:textColor="?attr/colorError"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewBlockedIcon" />
 
     <TextView
         android:id="@+id/textViewBlockedMessage"
