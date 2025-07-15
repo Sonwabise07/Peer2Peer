@@ -6,6 +6,11 @@ import com.google.firebase.firestore.PropertyName;
 import com.google.firebase.firestore.ServerTimestamp;
 
 public class Report {
+    // Status constants to avoid magic strings
+    public static final String STATUS_PENDING = "pending";
+    public static final String STATUS_REVIEWED = "reviewed";
+    public static final String STATUS_RESOLVED = "resolved";
+    
     @DocumentId
     private String reportId;
 
@@ -32,8 +37,15 @@ public class Report {
         this.reportedTutorUid = reportedTutorUid;
         this.reportedTutorName = reportedTutorName;
         this.reasonCategory = reasonCategory;
-        this.reasonDetails = reasonDetails; // **** Use reasonDetails ****
+        this.reasonDetails = reasonDetails; 
         this.reportStatus = reportStatus;
+    }
+
+    // Additional constructor that includes screenshotUrl
+    public Report(String reporterUid, String reporterEmail, String reportedTutorUid, String reportedTutorName,
+                  String reasonCategory, String reasonDetails, String reportStatus, String screenshotUrl) {
+        this(reporterUid, reporterEmail, reportedTutorUid, reportedTutorName, reasonCategory, reasonDetails, reportStatus);
+        this.screenshotUrl = screenshotUrl;
     }
 
     // --- Getters ---
@@ -55,8 +67,8 @@ public class Report {
     @PropertyName("reasonCategory")
     public String getReasonCategory() { return reasonCategory; }
 
-    @PropertyName("reasonDetails") // **** MAPS TO "reasonDetails" in Firestore ****
-    public String getReasonDetails() { return reasonDetails; } // **** CORRECTED GETTER ****
+    @PropertyName("reasonDetails") 
+    public String getReasonDetails() { return reasonDetails; }
 
     @PropertyName("timestamp")
     public Timestamp getTimestamp() { return timestamp; }
@@ -67,27 +79,38 @@ public class Report {
     @PropertyName("screenshotUrl")
     public String getScreenshotUrl() { return screenshotUrl; }
 
-    // --- Setters ---
-    // Firestore uses these setters (or public fields) during deserialization
+    // --- Setters with validation ---
     public void setReportId(String reportId) { this.reportId = reportId; }
 
     @PropertyName("reporterUid")
     public void setReporterUid(String reporterUid) { this.reporterUid = reporterUid; }
 
     @PropertyName("reporterEmail")
-    public void setReporterEmail(String reporterEmail) { this.reporterEmail = reporterEmail; }
+    public void setReporterEmail(String reporterEmail) { 
+        if (reporterEmail != null) {
+            this.reporterEmail = reporterEmail.trim();
+        }
+    }
 
     @PropertyName("reportedTutorUid")
     public void setReportedTutorUid(String reportedTutorUid) { this.reportedTutorUid = reportedTutorUid; }
 
     @PropertyName("reportedTutorName")
-    public void setReportedTutorName(String reportedTutorName) { this.reportedTutorName = reportedTutorName; }
+    public void setReportedTutorName(String reportedTutorName) { 
+        if (reportedTutorName != null) {
+            this.reportedTutorName = reportedTutorName.trim();
+        }
+    }
 
     @PropertyName("reasonCategory")
     public void setReasonCategory(String reasonCategory) { this.reasonCategory = reasonCategory; }
 
-    @PropertyName("reasonDetails") // **** MAPS TO "reasonDetails" in Firestore ****
-    public void setReasonDetails(String reasonDetails) { this.reasonDetails = reasonDetails; } // **** CORRECTED SETTER ****
+    @PropertyName("reasonDetails") 
+    public void setReasonDetails(String reasonDetails) { 
+        if (reasonDetails != null) {
+            this.reasonDetails = reasonDetails.trim();
+        }
+    }
 
     @PropertyName("timestamp")
     public void setTimestamp(Timestamp timestamp) { this.timestamp = timestamp; }
@@ -97,4 +120,17 @@ public class Report {
 
     @PropertyName("screenshotUrl")
     public void setScreenshotUrl(String screenshotUrl) { this.screenshotUrl = screenshotUrl; }
+
+    // Utility method for debugging and logging
+    @Override
+    public String toString() {
+        return "Report{" +
+                "reportId='" + reportId + '\'' +
+                ", reporterUid='" + reporterUid + '\'' +
+                ", reportedTutorUid='" + reportedTutorUid + '\'' +
+                ", reasonCategory='" + reasonCategory + '\'' +
+                ", reportStatus='" + reportStatus + '\'' +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }

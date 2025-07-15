@@ -6,103 +6,207 @@
     android:layout_height="match_parent"
     android:padding="24dp"
     android:background="?android:colorBackground"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".AccountBlockedActivity">
 
-    <ImageView
-        android:id="@+id/imageViewBlockedIcon"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/ic_admin_block_user"
-        android:contentDescription="@string/account_blocked_icon_description"
+    <!-- Scrollable container for better accessibility on small screens -->
+    <ScrollView
+        android:id="@+id/scrollViewContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.2"
-        app:layout_constraintBottom_toTopOf="@+id/textViewBlockedTitle"/>
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <TextView
-        android:id="@+id/textViewBlockedTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Account Suspended"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
-        android:textColor="?attr/colorError"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewBlockedIcon" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="match_parent">
 
-    <TextView
-        android:id="@+id/textViewBlockedMessage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="Your account has been temporarily suspended. This may be due to a violation of our platform guidelines or for other security reasons."
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewBlockedTitle" />
+            <!-- Main content container for better organization -->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.15" />
 
-    <TextView
-        android:id="@+id/textViewBlockedAppealIntro"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:text="To appeal this decision or for more information, please contact our support team with your registered email address:"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewBlockedMessage" />
+            <ImageView
+                android:id="@+id/imageViewBlockedIcon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_admin_block_user"
+                android:contentDescription="@string/account_blocked_icon_description"
+                android:importantForAccessibility="yes"
+                app:layout_constraintTop_toTopOf="@id/guidelineTop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textViewBlockedTitle"
+                app:layout_constraintVertical_chainStyle="packed" />
 
-    <TextView
-        android:id="@+id/textViewAdminContactEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Support Email: admin@dut4life.ac.za"
-        android:textStyle="bold"
-        android:autoLink="email"
-        android:textColorLink="?attr/colorPrimary"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewBlockedAppealIntro" />
+            <TextView
+                android:id="@+id/textViewBlockedTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/account_suspended_title"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:textColor="?attr/colorError"
+                android:gravity="center"
+                android:importantForAccessibility="yes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewBlockedIcon"
+                app:layout_constraintBottom_toTopOf="@+id/textViewBlockedMessage"
+                tools:text="Account Suspended" />
 
-    <TextView
-        android:id="@+id/textViewBlockedInstructions"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="Please check your email for any communication from our team. You can try logging in again later to see if your access has been restored."
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAdminContactEmail" />
+            <TextView
+                android:id="@+id/textViewBlockedMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:text="@string/account_blocked_message"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:lineSpacingExtra="4dp"
+                android:importantForAccessibility="yes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewBlockedTitle"
+                app:layout_constraintBottom_toTopOf="@+id/textViewBlockedAppealIntro"
+                tools:text="Your account has been temporarily suspended. This may be due to a violation of our platform guidelines or for other security reasons." />
 
-    <Button
-        android:id="@+id/buttonReturnToLogin"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Return to Login Screen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewBlockedInstructions" />
+            <TextView
+                android:id="@+id/textViewBlockedAppealIntro"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:text="@string/account_blocked_appeal_intro"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:lineSpacingExtra="2dp"
+                android:importantForAccessibility="yes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewBlockedMessage"
+                app:layout_constraintBottom_toTopOf="@+id/cardViewContactInfo"
+                tools:text="To appeal this decision or for more information, please contact our support team with your registered email address:" />
 
-    <TextView
-        android:id="@+id/textViewUserEmailForAppeal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        tools:text="Attempted login for: user@example.com"
-        tools:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@id/buttonReturnToLogin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+            <!-- Card for better visual grouping of contact information -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewContactInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="?attr/colorOutline"
+                app:layout_constraintTop_toBottomOf="@+id/textViewBlockedAppealIntro"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textViewBlockedInstructions">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/textViewContactLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contact_support_label"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:layout_gravity="center_horizontal"
+                        tools:text="Support Contact" />
+
+                    <TextView
+                        android:id="@+id/textViewAdminContactEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/admin_contact_email"
+                        android:textStyle="bold"
+                        android:autoLink="email"
+                        android:textColorLink="?attr/colorPrimary"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        android:layout_gravity="center_horizontal"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:importantForAccessibility="yes"
+                        android:contentDescription="@string/admin_email_content_description"
+                        tools:text="admin@dut4life.ac.za" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/textViewBlockedInstructions"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:gravity="center"
+                android:text="@string/account_blocked_instructions"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:lineSpacingExtra="2dp"
+                android:importantForAccessibility="yes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewContactInfo"
+                app:layout_constraintBottom_toTopOf="@+id/buttonReturnToLogin"
+                tools:text="Please check your email for any communication from our team. You can try logging in again later to see if your access has been restored." />
+
+            <Button
+                android:id="@+id/buttonReturnToLogin"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/return_to_login_button"
+                android:minWidth="120dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:importantForAccessibility="yes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewBlockedInstructions"
+                app:layout_constraintBottom_toTopOf="@+id/textViewUserEmailForAppeal"
+                tools:text="Return to Login Screen" />
+
+            <TextView
+                android:id="@+id/textViewUserEmailForAppeal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:visibility="gone"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:importantForAccessibility="yes"
+                app:layout_constraintTop_toBottomOf="@id/buttonReturnToLogin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="Attempted login for: user@example.com"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
